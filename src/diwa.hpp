@@ -76,7 +76,9 @@ private:
 public:
     /**
      * 
-     * @brief Constructor for Diwa Artificial Neural Network class.
+     * @brief Creates an instance of the Diwa class with the
+     *        specified number of input neurons, hidden layers,
+     *        hidden neurons, and output neurons.
      *
      * @param inputNeurons Number of input neurons.
      * @param hiddenLayers Number of hidden layers.
