@@ -1,4 +1,8 @@
-# Diwa: Arduino Tiny AI/ML Library
+<p align="center">
+    <img src="https://github.com/nthnn/diwa/blob/main/logo.png" width="200" />
+    <br/><br/>
+    <h1>Diwa: Arduino Tiny AI/ML Library</h1>
+</p>
 
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg) ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.1-red?logo=Arduino)
