@@ -1,6 +1,6 @@
 /*
- * This file is part of the SIM900 Arduino Shield library.
- * Copyright (c) 2023 Nathanne Isip
+ * This file is part of the Diwa library.
+ * Copyright (c) 2024 Nathanne Isip
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
