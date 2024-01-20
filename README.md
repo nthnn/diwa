@@ -4,7 +4,6 @@
     <h1>Diwa: Arduino Tiny AI/ML Library</h1>
 </p>
 
-![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg) ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.1-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
@@ -88,7 +87,63 @@ Contributions and feedback are all welcome to enhance this library. If you encou
 
 ## API Reference
 
-See full API reference and documentation at [nthnn.github.com/diwa](https://nthnn.github.com/diwa).
+```cpp
+Diwa(
+    int inputNeurons,
+    int hiddenLayers,
+    int hiddenNeurons,
+    int outputNeurons
+);
+```
+
+**Description:**
+
+Creates an instance of the Diwa class with the specified number of input neurons, hidden layers, hidden neurons, and output neurons.
+
+**Parameters:**
+
+- `inputNeurons` - Number of input neurons.
+- `hiddenLayers` - Number of hidden layers.
+- `hiddenNeurons` - Number of neurons in each hidden layer.
+- `outputNeurons` - Number of output neurons.
+
+---
+
+```cpp
+float* Diwa::inference(float *inputs);
+```
+
+**Description:**
+
+Given an array of input values, this method computes and returns an array of output values through the neural network.
+
+**Parameters:**
+
+- `inputs` - Array of input values for the neural network.
+
+**Returns:**
+
+Array of output values after inference.
+
+---
+
+```cpp
+void Diwa::train(
+    float learningRate,
+    float *inputNeurons,
+    float *outputNeurons
+);
+```
+
+**Description:**
+
+This method facilitates the training of the neural network by adjusting its weights based on the provided input and target output values.
+
+**Parameters:**
+
+- `learningRate` - Learning rate for the training process.
+- `inputNeurons` - Array of input values for training.
+- `outputNeurons` - Array of target output values for training.
 
 ## License
 
