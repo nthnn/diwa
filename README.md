@@ -19,6 +19,8 @@ Diwa stands out as a straightforward and effective solution for implementing art
 > [!NOTE]
 > Diwa is primarily intended for lightweight applications. For more intricate tasks, consider using advanced machine learning libraries on more powerful platforms.
 
+See live demo on [Wokwi](https://wokwi.com/projects/387551593748039681).
+
 ## Getting Started
 
 To start using Diwa library in your Arduino projects, follow these simple steps:
