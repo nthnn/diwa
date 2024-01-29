@@ -24,13 +24,7 @@
 #ifndef DIWA_H
 #define DIWA_H
 
-#ifdef ARDUINO
-    #include <Arduino.h>
-#elif defined(__GNUC__) || !defined(__clang__) || defined(__clang__)
-    #include <stdlib.h>
-    #include <cstring>
-#endif
-
+#include <Arduino.h>
 #include <assert.h>
 #include <math.h>
 
