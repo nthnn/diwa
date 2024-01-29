@@ -21,7 +21,8 @@
  * THE SOFTWARE.
  */
 
-#include "diwa.hpp"
+#include <bootloader_random.h>
+#include <diwa.hpp>
 
 static float diwaSigmoid(float value) {
     if(value < -45.0) return 0;
@@ -31,8 +32,13 @@ static float diwaSigmoid(float value) {
 }
 
 Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons) {
+    assert(ESP.getFreePsram() != 0);
     assert(!(hiddenLayers < 0 || inputNeurons < 0 || outputNeurons < 1 ||
         (hiddenLayers > 0 && hiddenNeurons < 1)));
+
+    bootloader_random_enable();
+    randomSeed(esp_random());
+    bootloader_random_disable();
 
     const int hiddenWeightCount = hiddenLayers ?
         (inputNeurons + 1) * hiddenNeurons +
@@ -53,7 +59,7 @@ Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeur
     this->weightCount = weightCount;
     this->neuronCount = neuronCount;
 
-    this->weights = (float*) malloc(sizeof(float) * (weightCount * neuronCount));
+    this->weights = (float*) ps_malloc(sizeof(float) * (weightCount * neuronCount));
     this->outputs = this->weights + this->weightCount;
     this->deltas = this->outputs + this->neuronCount;
 
