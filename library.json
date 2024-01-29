@@ -17,5 +17,5 @@
     "license": "MIT",
     "homepage": "https://github.com/nthnn/diwa",
     "frameworks": "*",
-    "platforms": "*"
+    "platforms": ["espressif32"]
 }
