@@ -24,7 +24,10 @@
 #ifndef DIWA_H
 #define DIWA_H
 
-#include <Arduino.h>
+#ifdef ARDUINO
+#   include <Arduino.h>
+#endif
+
 #include <assert.h>
 #include <math.h>
 
