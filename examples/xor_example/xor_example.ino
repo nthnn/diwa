@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include <diwa.hpp>
+#include <diwa.h>
 
 void setup() {
     // Initialize serial communication with a baud rate of 115200
