@@ -21,10 +21,15 @@
  * THE SOFTWARE.
  */
 
-#include <bootloader_random.h>
-#include <diwa.hpp>
+#ifdef ARDUINO
+#   include <bootloader_random.h>
+#else
+#   include <cstring>
+#endif
 
-static float diwaSigmoid(float value) {
+#include <diwa.h>
+
+static inline float diwaSigmoid(float value) {
     if(value < -45.0) return 0;
     if(value > 45.0) return 1;
 
@@ -32,13 +37,18 @@ static float diwaSigmoid(float value) {
 }
 
 Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons) {
+    #ifdef ARDUINO
     assert(ESP.getFreePsram() != 0);
+    #endif
+
     assert(!(hiddenLayers < 0 || inputNeurons < 0 || outputNeurons < 1 ||
         (hiddenLayers > 0 && hiddenNeurons < 1)));
 
+    #ifdef ARDUINO
     bootloader_random_enable();
     randomSeed(esp_random());
     bootloader_random_disable();
+    #endif
 
     const int hiddenWeightCount = hiddenLayers ?
         (inputNeurons + 1) * hiddenNeurons +
@@ -59,7 +69,12 @@ Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeur
     this->weightCount = weightCount;
     this->neuronCount = neuronCount;
 
+    #ifdef ARDUINO
     this->weights = (float*) ps_malloc(sizeof(float) * (weightCount * neuronCount));
+    #else
+    this->weights = (float*) malloc(sizeof(float) * (weightCount * neuronCount));
+    #endif
+
     this->outputs = this->weights + this->weightCount;
     this->deltas = this->outputs + this->neuronCount;
 
@@ -68,7 +83,11 @@ Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeur
 
 void Diwa::randomizeWeights() {
     for(int i = 0; i < this->weightCount; i++)
+        #ifdef ARDUINO
         this->weights[i] = (((float) random()) / RAND_MAX) - 0.5;
+        #else
+        this->weights[i] = (((float) rand()) / RAND_MAX) - 0.5;
+        #endif
 }
 
 float* Diwa::inference(float *inputNeurons) {
