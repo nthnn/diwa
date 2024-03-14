@@ -29,20 +29,107 @@
 
 #include <diwa.h>
 
-static inline float diwaSigmoid(float value) {
+typedef union {
+    double d;
+    uint8_t b[8];
+} double_p;
+
+static inline double diwaSigmoid(double value) {
     if(value < -45.0) return 0;
     if(value > 45.0) return 1;
 
     return 1.0 / (1.0 + exp(-value));
 }
 
-Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons) {
-    #ifdef ARDUINO
-    assert(ESP.getFreePsram() != 0);
-    #endif
+static inline uint8_t* intToU8a(int value) {
+    uint8_t* bytes = new uint8_t[4];
 
-    assert(!(hiddenLayers < 0 || inputNeurons < 0 || outputNeurons < 1 ||
-        (hiddenLayers > 0 && hiddenNeurons < 1)));
+    bytes[0] = (value >> 0) & 0xFF;
+    bytes[1] = (value >> 8) & 0xFF;
+    bytes[2] = (value >> 16) & 0xFF;
+    bytes[3] = (value >> 24) & 0xFF;
+
+    return bytes;
+}
+
+static inline int u8aToInt(uint8_t bytes[4]) {
+    int result = 0;
+
+    result |= bytes[0];
+    result |= bytes[1] << 8;
+    result |= bytes[2] << 16;
+    result |= bytes[3] << 24;
+
+    return result;
+}
+
+static inline uint8_t* doubleToU8a(double value) {
+    double_p db;
+    db.d = value;
+
+    uint8_t* bytes = new uint8_t[8];
+    for(uint8_t i = 0; i < 8; ++i)
+        bytes[i] = db.b[i];
+
+    return bytes;
+}
+
+static inline double u8aToDouble(uint8_t bytes[8]) {
+    double_p db;
+    for(uint8_t i = 0; i < 8; ++i)
+        db.b[i] = bytes[i];
+
+    return db.d;
+}
+
+#ifndef ARDUINO
+
+static inline void writeToStream(std::ofstream& stream, const uint8_t* data, size_t size) {
+    for(size_t i = 0; i < size; i++)
+        stream.write(
+            reinterpret_cast<const char*>(&data[i]),
+            sizeof(uint8_t)
+        );
+
+    delete[] data;
+}
+
+#endif
+
+Diwa::Diwa() {
+    this->initialize(0, 0, 0, 0);
+}
+
+Diwa::~Diwa() {
+    free(this->weights);
+}
+
+inline void Diwa::randomizeWeights() {
+    for(int i = 0; i < this->weightCount; i++)
+        #ifdef ARDUINO
+        this->weights[i] = (((double) random()) / RAND_MAX) - 0.5;
+        #else
+        this->weights[i] = (((double) rand()) / RAND_MAX) - 0.5;
+        #endif
+}
+
+DiwaError Diwa::initialize(
+    int inputNeurons,
+    int hiddenLayers,
+    int hiddenNeurons,
+    int outputNeurons,
+    bool randomizeWeights
+) {
+    if(inputNeurons == 0 &&
+        hiddenLayers == 0 &&
+        hiddenNeurons == 0 &&
+        outputNeurons == 0)
+        return NO_ERROR;
+
+    #ifdef ARDUINO
+    if(ESP.getFreePsram() != 0)
+        return NO_ESP_PSRAM;
+    #endif
 
     #ifdef ARDUINO
     bootloader_random_enable();
@@ -70,36 +157,30 @@ Diwa::Diwa(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeur
     this->neuronCount = neuronCount;
 
     #ifdef ARDUINO
-    this->weights = (float*) ps_malloc(sizeof(float) * (weightCount * neuronCount));
+    this->weights = (double*) ps_malloc(sizeof(double) * (weightCount * neuronCount));
     #else
-    this->weights = (float*) malloc(sizeof(float) * (weightCount * neuronCount));
+    this->weights = (double*) malloc(sizeof(double) * (weightCount * neuronCount));
     #endif
 
     this->outputs = this->weights + this->weightCount;
     this->deltas = this->outputs + this->neuronCount;
 
-    this->randomizeWeights();
+    if(randomizeWeights)
+        this->randomizeWeights();
+
+    return NO_ERROR;
 }
 
-void Diwa::randomizeWeights() {
-    for(int i = 0; i < this->weightCount; i++)
-        #ifdef ARDUINO
-        this->weights[i] = (((float) random()) / RAND_MAX) - 0.5;
-        #else
-        this->weights[i] = (((float) rand()) / RAND_MAX) - 0.5;
-        #endif
-}
+double* Diwa::inference(double *inputNeurons) {
+    double *weights = this->weights;
+    double *inputs = this->outputs;
+    double *outputs = this->outputs + this->inputNeurons;
 
-float* Diwa::inference(float *inputNeurons) {
-    float *weights = this->weights;
-    float *inputs = this->outputs;
-    float *outputs = this->outputs + this->inputNeurons;
-
-    memcpy(this->outputs, inputNeurons, sizeof(float) * this->inputNeurons);
+    memcpy(this->outputs, inputNeurons, sizeof(double) * this->inputNeurons);
     if(!this->hiddenLayers) {
-        float *returnValues = outputs;
+        double *returnValues = outputs;
         for(int j = 0; j < this->outputNeurons; ++j) {
-            float sum = *weights++ * -1.0;
+            double sum = *weights++ * -1.0;
 
             for(int k = 0; k < this->inputNeurons; ++k)
                 sum += *weights++ * inputs[k];
@@ -110,7 +191,7 @@ float* Diwa::inference(float *inputNeurons) {
     }
 
     for(int j = 0; j < this->hiddenNeurons; ++j) {
-        float sum = *weights++ * -1.0;
+        double sum = *weights++ * -1.0;
 
         for(int k = 0; k < this->inputNeurons; ++k)
             sum += *weights++ * inputs[k];
@@ -120,7 +201,7 @@ float* Diwa::inference(float *inputNeurons) {
     inputs += this->inputNeurons;
     for(int h = 1; h < this->hiddenLayers; ++h) {
         for(int j = 0; j < this->hiddenNeurons; ++j) {
-            float sum = *weights++ * -1.0;
+            double sum = *weights++ * -1.0;
             
             for(int k = 0; k < this->hiddenNeurons; ++k)
                 sum += *weights++ * inputs[k];
@@ -130,9 +211,9 @@ float* Diwa::inference(float *inputNeurons) {
         inputs += this->hiddenNeurons;
     }
 
-    float* returnValue = outputs;
+    double* returnValue = outputs;
     for(int j = 0; j < this->outputNeurons; ++j) {
-        float sum = *weights++ * -1.0;
+        double sum = *weights++ * -1.0;
 
         for(int k = 0; k < this->hiddenNeurons; ++k)
             sum += *weights++ * inputs[k];
@@ -142,20 +223,20 @@ float* Diwa::inference(float *inputNeurons) {
     return returnValue;
 }
 
-void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) {
+void Diwa::train(double learningRate, double *inputNeurons, double *outputNeurons) {
     this->inference(inputNeurons);
 
     {
-        float *outputs =
+        double *outputs =
             this->outputs +
             this->inputNeurons +
             this->hiddenNeurons *
             this->hiddenLayers;
-        float *deltas =
+        double *deltas =
             this->deltas +
             this->hiddenNeurons *
             this->hiddenLayers;
-        float *training = outputNeurons;
+        double *training = outputNeurons;
 
         for(int j = 0; j < this->outputNeurons; ++j) {
             *deltas++ = (*training - *outputs) *
@@ -165,26 +246,26 @@ void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) 
     }
 
     for(int h = this->hiddenLayers - 1; h >= 0; --h) {
-        float *outputs =
+        double *outputs =
             this->outputs +
             this->inputNeurons +
             (h * this->hiddenNeurons);
 
-        float *deltas =
+        double *deltas =
             this->deltas +
             (h * this->hiddenNeurons);
 
-        float *firstDelta =
+        double *firstDelta =
             this->deltas +
             ((h + 1) * this->hiddenNeurons);
 
-        float *firstWeight =
+        double *firstWeight =
             this->weights +
             ((this->inputNeurons + 1) * this->hiddenNeurons) +
             ((this->hiddenNeurons + 1) * this->hiddenNeurons * h);
 
         for(int j = 0; j < this->hiddenNeurons; ++j) {
-            float delta = 0;
+            double delta = 0;
 
             for(int k = 0;
                 k < (h == this->hiddenLayers - 1 ?
@@ -193,8 +274,8 @@ void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) 
                 ++k) {
                 int weightIndex = k * (this->hiddenNeurons + 1) + (j + 1);
 
-                float forwardDelta = firstDelta[k];
-                float forwardWeight = firstWeight[weightIndex];
+                double forwardDelta = firstDelta[k];
+                double forwardWeight = firstWeight[weightIndex];
 
                 delta += forwardDelta * forwardWeight;
             }
@@ -205,19 +286,19 @@ void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) 
     }
 
     {
-        float *deltas =
+        double *deltas =
             this->deltas +
             this->hiddenNeurons *
             this->hiddenLayers;
 
-        float *weights =
+        double *weights =
             this->weights +
             (this->hiddenLayers ?
                 (this->inputNeurons + 1) * this->hiddenNeurons +
                 (this->hiddenNeurons + 1) * this->hiddenNeurons *
                 (this->hiddenLayers - 1) : 0);
 
-        float *firstOutput =
+        double *firstOutput =
             this->outputs +
             (this->hiddenLayers ?
                 (this->inputNeurons + this->hiddenNeurons *
@@ -237,14 +318,14 @@ void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) 
     }
 
     for(int h = this->hiddenLayers - 1; h >= 0; --h) {
-        float *deltas = this->deltas +
+        double *deltas = this->deltas +
             (h * this->hiddenNeurons);
 
-        float *firstInput = this->outputs +
+        double *firstInput = this->outputs +
             (h ? this->inputNeurons +
                 this->hiddenNeurons * (h - 1) : 0);
 
-        float *weights =
+        double *weights =
             this->weights + (h ?
                 (this->inputNeurons + 1) * this->hiddenNeurons +
                 (this->hiddenNeurons + 1) * this->hiddenNeurons *
@@ -263,3 +344,89 @@ void Diwa::train(float learningRate, float *inputNeurons, float *outputNeurons) 
         }
     }
 }
+
+#ifdef ARDUINO
+
+DiwaError Diwa::loadFromFile(File annFile) {
+    return NO_ERROR;
+}
+
+DiwaError Diwa::saveToFile(File annFile) {
+    return NO_ERROR;
+}
+
+#else
+
+DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
+    if(!annFile.is_open())
+        return STREAM_NOT_OPEN;
+
+    uint8_t magic[5];
+    annFile.read(reinterpret_cast<char*>(magic), 4);
+
+    if(std::string(reinterpret_cast<char*>(magic), 4) != "diwa")
+        return INVALID_MAGIC_NUMBER;
+
+    uint8_t temp_int[5];
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->inputNeurons = u8aToInt(temp_int);
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->hiddenNeurons = u8aToInt(temp_int);
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->hiddenLayers = u8aToInt(temp_int);
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->outputNeurons = u8aToInt(temp_int);
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->weightCount = u8aToInt(temp_int);
+
+    annFile.read(reinterpret_cast<char*>(temp_int), 4);
+    this->neuronCount = u8aToInt(temp_int);
+
+    {
+        DiwaError error;
+        if((error = this->initialize(
+                this->inputNeurons,
+                this->hiddenLayers,
+                this->hiddenNeurons,
+                this->outputNeurons,
+                false
+            )) != NO_ERROR)
+            return error;
+    }
+
+    uint8_t temp_db[9];
+    for(int i = 0; i < this->weightCount; i++) {
+        annFile.read(reinterpret_cast<char*>(temp_db), 8);
+        this->weights[i] = u8aToDouble(temp_db);
+    }
+
+    return NO_ERROR;
+}
+
+DiwaError Diwa::saveToFile(std::ofstream& annFile) {
+    if(!annFile.is_open())
+        return STREAM_NOT_OPEN;
+
+    const uint8_t* magic_signature = new uint8_t[4] {'d', 'i', 'w', 'a'};
+    writeToStream(annFile, magic_signature, 4);
+
+    writeToStream(annFile, intToU8a(this->inputNeurons), 4);
+    writeToStream(annFile, intToU8a(this->hiddenNeurons), 4);
+    writeToStream(annFile, intToU8a(this->hiddenLayers), 4);
+    writeToStream(annFile, intToU8a(this->outputNeurons), 4);
+
+    writeToStream(annFile, intToU8a(this->weightCount), 4);
+    writeToStream(annFile, intToU8a(this->neuronCount), 4);
+
+    for(int i = 0; i < this->weightCount; i++)
+        writeToStream(annFile, doubleToU8a(this->weights[i]), 8);
+
+    return NO_ERROR;
+}
+
+#endif

@@ -26,10 +26,26 @@
 
 #ifdef ARDUINO
 #   include <Arduino.h>
+#   include <FS.h>
+#else
+#   include <fstream>
+#   include <stdint.h>
 #endif
 
-#include <assert.h>
 #include <math.h>
+
+typedef enum {
+    NO_ERROR,
+    INVALID_PARAM_VALUES,
+    MODEL_READ_ERROR,
+    MODEL_SAVE_ERROR,
+    INVALID_MAGIC_NUMBER,
+    STREAM_NOT_OPEN,
+
+    #ifdef ARDUINO
+    NO_ESP_PSRAM
+    #endif
+} DiwaError;
 
 /**
  * 
@@ -59,9 +75,9 @@ private:
     int weightCount;    /**< Total number of weights in the network */
     int neuronCount;    /**< Total number of neurons in the network */
 
-    float *weights;     /**< Array to store weights */
-    float *outputs;     /**< Array to store neuron outputs */
-    float *deltas;      /**< Array to store delta values during training */
+    double *weights;     /**< Array to store weights */
+    double *outputs;     /**< Array to store neuron outputs */
+    double *deltas;      /**< Array to store delta values during training */
 
     /**
      * 
@@ -71,23 +87,15 @@ private:
     void randomizeWeights();
 
 public:
-    /**
-     * 
-     * @brief Creates an instance of the Diwa class with the
-     *        specified number of input neurons, hidden layers,
-     *        hidden neurons, and output neurons.
-     *
-     * @param inputNeurons Number of input neurons.
-     * @param hiddenLayers Number of hidden layers.
-     * @param hiddenNeurons Number of neurons in each hidden layer.
-     * @param outputNeurons Number of output neurons.
-     * 
-     */
-    Diwa(
+    Diwa();
+    ~Diwa();
+
+    DiwaError initialize(
         int inputNeurons,
         int hiddenLayers,
         int hiddenNeurons,
-        int outputNeurons
+        int outputNeurons,
+        bool randomizeWeights = true
     );
 
     /**
@@ -102,7 +110,7 @@ public:
      * @return Array of output values after inference.
      * 
      */
-    float* inference(float *inputs);
+    double* inference(double *inputs);
 
     /**
      * 
@@ -118,10 +126,22 @@ public:
      * 
      */
     void train(
-        float learningRate,
-        float *inputNeurons,
-        float *outputNeurons
+        double learningRate,
+        double *inputNeurons,
+        double *outputNeurons
     );
+
+    #ifdef ARDUINO
+    DiwaError loadFromFile(File annFile);
+    #else
+    DiwaError loadFromFile(std::ifstream& annFile);
+    #endif
+
+    #ifdef ARDUINO
+    DiwaError saveToFile(File annFile);
+    #else
+    DiwaError saveToFile(std::ofstream& annFile);
+    #endif
 };
 
 #endif  // DIWA_H
