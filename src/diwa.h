@@ -110,6 +110,14 @@ private:
      */
     void randomizeWeights();
 
+    /**
+     * 
+     * @brief Allocates memory for neural network weights.
+     * 
+     * @return DiwaError The corresponding DiwaError, if any.
+    */
+    DiwaError initializeWeights();
+
 public:
     /**
      * @brief Default constructor for the Diwa class.

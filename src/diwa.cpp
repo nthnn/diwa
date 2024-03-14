@@ -143,31 +143,38 @@ DiwaError Diwa::initialize(
         (hiddenNeurons + 1) : (inputNeurons + 1)
     ) * outputNeurons;
 
-    const int weightCount = hiddenWeightCount + outputWeightCount;
-    const int neuronCount = inputNeurons + hiddenNeurons * hiddenLayers + outputNeurons;
-
     this->inputNeurons = inputNeurons;
     this->hiddenLayers = hiddenLayers;
     this->hiddenNeurons = hiddenNeurons;
     this->outputNeurons = outputNeurons;
 
-    this->weightCount = weightCount;
-    this->neuronCount = neuronCount;
+    this->weightCount = hiddenWeightCount + outputWeightCount;
+    this->neuronCount = inputNeurons + hiddenNeurons * hiddenLayers + outputNeurons;
 
-    #ifdef ARDUINO
-    this->weights = (double*) ps_malloc(sizeof(double) * (weightCount * neuronCount));
-    #else
-    this->weights = (double*) malloc(sizeof(double) * (weightCount * neuronCount));
-    #endif
-
-    if(this->weights == NULL)
-        return MALLOC_FAILED;
+    if(randomizeWeights) {
+        DiwaError error;
+        if((error = this->initializeWeights()) != NO_ERROR)
+            return error;
+    }
 
     this->outputs = this->weights + this->weightCount;
     this->deltas = this->outputs + this->neuronCount;
 
     if(randomizeWeights)
         this->randomizeWeights();
+
+    return NO_ERROR;
+}
+
+DiwaError Diwa::initializeWeights() {
+    #ifdef ARDUINO
+    this->weights = (double*) ps_malloc(sizeof(double) * (this->weightCount * this->neuronCount));
+    #else
+    this->weights = (double*) malloc(sizeof(double) * (this->weightCount * this->neuronCount));
+    #endif
+
+    if(this->weights == NULL)
+        return MALLOC_FAILED;
 
     return NO_ERROR;
 }
@@ -352,7 +359,7 @@ DiwaError Diwa::loadFromFile(File annFile) {
     uint8_t magic[4];
     annFile.read(magic, 4);
 
-    if(memcmp(magic, "diwa", 4) == 0)
+    if(memcmp(magic, "diwa", 4) == 1)
         return INVALID_MAGIC_NUMBER;
 
     uint8_t temp_int[4];
@@ -385,6 +392,9 @@ DiwaError Diwa::loadFromFile(File annFile) {
                 false
             )) != NO_ERROR)
             return error;
+
+        if((error = this->initializeWeights()) != NO_ERROR)
+            return error;
     }
 
     uint8_t temp_db[8];
@@ -411,6 +421,7 @@ DiwaError Diwa::saveToFile(File annFile) {
     for(int i = 0; i < this->weightCount; i++)
         annFile.write(doubleToU8a(this->weights[i]), 8);
 
+    annFile.flush();
     return NO_ERROR;
 }
 
@@ -455,6 +466,9 @@ DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
                 this->outputNeurons,
                 false
             )) != NO_ERROR)
+            return error;
+
+        if((error = this->initializeWeights()) != NO_ERROR)
             return error;
     }
 
