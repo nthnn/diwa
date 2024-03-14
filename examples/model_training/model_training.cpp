@@ -39,8 +39,7 @@ void trainAndSave() {
     double trainingOutput[4][1] = {{1}, {0}, {0}, {1}};
 
     // Initialize the neural network with specified parameters
-    DiwaError error;
-    if((error = network.initialize(2, 1, 3, 1)) == NO_ERROR)
+    if(network.initialize(2, 1, 3, 1) == NO_ERROR)
         cout << "Done initializing neural network." << endl;
     else {
         cout << "Something went wrong initializing neural network." << endl;
@@ -86,11 +85,10 @@ void loadAndRead() {
     ifstream infile("model.ann", ios::binary);
 
     // Load the trained model from the file
-    DiwaError error;
-    if((error = network.loadFromFile(infile)) == NO_ERROR)
+    if(network.loadFromFile(infile) == NO_ERROR)
         cout << "Model loaded successfully!" << endl;
     else {
-        cout << "Something went wrong loading model file." endl;
+        cout << "Something went wrong loading model file." << endl;
         exit(0);
     }
 
