@@ -127,11 +127,9 @@ DiwaError Diwa::initialize(
         return NO_ERROR;
 
     #ifdef ARDUINO
-    if(ESP.getFreePsram() != 0)
+    if(ESP.getFreePsram() == 0)
         return NO_ESP_PSRAM;
-    #endif
 
-    #ifdef ARDUINO
     bootloader_random_enable();
     randomSeed(esp_random());
     bootloader_random_disable();
@@ -161,6 +159,9 @@ DiwaError Diwa::initialize(
     #else
     this->weights = (double*) malloc(sizeof(double) * (weightCount * neuronCount));
     #endif
+
+    if(this->weights == NULL)
+        return MALLOC_FAILED;
 
     this->outputs = this->weights + this->weightCount;
     this->deltas = this->outputs + this->neuronCount;
