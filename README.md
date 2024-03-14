@@ -7,13 +7,13 @@
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.1-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
-Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, and similar development boards. It is designed for resource-constrained environments, offering a streamlined solution for tasks that require neural network capabilities.
+Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32 and similar development boards that has PSRAM with Arduino platform. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
 
 Diwa stands out as a straightforward and effective solution for implementing artificial neural networks on microcontrollers. Key features include:
 
-- **Lightweight**: Designed for resource-constrained microcontroller environments.
+- **Lightweight**: Designed for resource-constrained microcontroller environments yet can still be used within non-Arduino environments.
 - **Simple Implementation**: Provides a basic yet effective implementation of a Feedforward ANN.
-- **Easy Integration**: Suitable for microcontrollers like ESP8266, ESP32, and similar boards.
+- **Easy Integration**: Suitable for microcontrollers like ESP32 and similar boards with PSRAM.
 - **Training Support**: Includes methods for training the neural network using backpropagation.
 
 > [!NOTE]
@@ -43,35 +43,37 @@ To access the examples:
 
 Here's a full example usage.
 ```cpp
-#include <diwa.hpp>
+#include <diwa.h>
 
 void setup() {
     // Initialize serial communication with a baud rate of 115200
     Serial.begin(115200);
 
     // Define training input and output data for XOR operation
-    float trainingInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
-    float trainingOutput[4][1] = {{0}, {1}, {1}, {0}};
+    double trainingInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+    double trainingOutput[4][1] = {{1}, {0}, {0}, {1}};
 
-    // Create an instance of the Diwa neural network with 2 input neurons, 1 hidden layer with 3 neurons, and 1 output neuron
-    Diwa network(2, 1, 3, 1);
+    // Create an instance of the Diwa neural network with 2 input neurons,
+    // 1 hidden layer with 3 neurons, and 1 output neuron
+    Diwa network;
+    network.initialize(2, 1, 3, 1);
 
     // Train the network for 3000 epochs using the XOR training data
-    for(int epoch = 0; epoch < 3000; epoch++) {
+    for(uint32_t epoch = 0; epoch < 10000; epoch++) {
         // Train the network for each set of input and target output values
-        network.train(4, trainingInput[0], trainingOutput[0]);
-        network.train(4, trainingInput[1], trainingOutput[1]);
-        network.train(4, trainingInput[2], trainingOutput[2]);
-        network.train(4, trainingInput[3], trainingOutput[3]);
+        network.train(6, trainingInput[0], trainingOutput[0]);
+        network.train(6, trainingInput[1], trainingOutput[1]);
+        network.train(6, trainingInput[2], trainingOutput[2]);
+        network.train(6, trainingInput[3], trainingOutput[3]);
     }
 
     // Perform inference on the trained network and print the results
-    for(int i = 0; i < 4; i++) {
+    for(uint8_t i = 0; i < 4; i++) {
         // Get the current input row
-        float* row = trainingInput[i];
+        double* row = trainingInput[i];
 
         // Perform inference using the trained network
-        float* inferred = network.inference(row);
+        double* inferred = network.inference(row);
 
         // Print the result for the current input
         char str[100];
@@ -80,72 +82,14 @@ void setup() {
     }
 }
 
-void loop() { }
+void loop() {
+  vTaskDelay(10);
+}
 ```
 
 ## Contribution and Feedback
 
 Contributions and feedback are all welcome to enhance this library. If you encounter any issues, have suggestions for improvements, or would like to contribute code, please do so.
-
-## API Reference
-
-```cpp
-Diwa(
-    int inputNeurons,
-    int hiddenLayers,
-    int hiddenNeurons,
-    int outputNeurons
-);
-```
-
-**Description:**
-
-Creates an instance of the Diwa class with the specified number of input neurons, hidden layers, hidden neurons, and output neurons.
-
-**Parameters:**
-
-- `inputNeurons` - Number of input neurons.
-- `hiddenLayers` - Number of hidden layers.
-- `hiddenNeurons` - Number of neurons in each hidden layer.
-- `outputNeurons` - Number of output neurons.
-
----
-
-```cpp
-float* Diwa::inference(float *inputs);
-```
-
-**Description:**
-
-Given an array of input values, this method computes and returns an array of output values through the neural network.
-
-**Parameters:**
-
-- `inputs` - Array of input values for the neural network.
-
-**Returns:**
-
-Array of output values after inference.
-
----
-
-```cpp
-void Diwa::train(
-    float learningRate,
-    float *inputNeurons,
-    float *outputNeurons
-);
-```
-
-**Description:**
-
-This method facilitates the training of the neural network by adjusting its weights based on the provided input and target output values.
-
-**Parameters:**
-
-- `learningRate` - Learning rate for the training process.
-- `inputNeurons` - Array of input values for training.
-- `outputNeurons` - Array of target output values for training.
 
 ## License
 
