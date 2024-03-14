@@ -349,10 +349,68 @@ void Diwa::train(double learningRate, double *inputNeurons, double *outputNeuron
 #ifdef ARDUINO
 
 DiwaError Diwa::loadFromFile(File annFile) {
+    uint8_t magic[4];
+    annFile.read(magic, 4);
+
+    if(memcmp(magic, "diwa", 4) == 0)
+        return INVALID_MAGIC_NUMBER;
+
+    uint8_t temp_int[4];
+
+    annFile.read(temp_int, 4);
+    this->inputNeurons = u8aToInt(temp_int);
+
+    annFile.read(temp_int, 4);
+    this->hiddenNeurons = u8aToInt(temp_int);
+
+    annFile.read(temp_int, 4);
+    this->hiddenLayers = u8aToInt(temp_int);
+
+    annFile.read(temp_int, 4);
+    this->outputNeurons = u8aToInt(temp_int);
+
+    annFile.read(temp_int, 4);
+    this->weightCount = u8aToInt(temp_int);
+
+    annFile.read(temp_int, 4);
+    this->neuronCount = u8aToInt(temp_int);
+
+    {
+        DiwaError error;
+        if((error = this->initialize(
+                this->inputNeurons,
+                this->hiddenLayers,
+                this->hiddenNeurons,
+                this->outputNeurons,
+                false
+            )) != NO_ERROR)
+            return error;
+    }
+
+    uint8_t temp_db[8];
+    for(int i = 0; i < this->weightCount; i++) {
+        annFile.read(temp_db, 8);
+        this->weights[i] = u8aToDouble(temp_db);
+    }
+
     return NO_ERROR;
 }
 
 DiwaError Diwa::saveToFile(File annFile) {
+    const uint8_t* magic_signature = new uint8_t[4] {'d', 'i', 'w', 'a'};
+    annFile.write(magic_signature, 4);
+
+    annFile.write(intToU8a(this->inputNeurons), 4);
+    annFile.write(intToU8a(this->hiddenNeurons), 4);
+    annFile.write(intToU8a(this->hiddenLayers), 4);
+    annFile.write(intToU8a(this->outputNeurons), 4);
+
+    annFile.write(intToU8a(this->weightCount), 4);
+    annFile.write(intToU8a(this->neuronCount), 4);
+
+    for(int i = 0; i < this->weightCount; i++)
+        annFile.write(doubleToU8a(this->weights[i]), 8);
+
     return NO_ERROR;
 }
 
