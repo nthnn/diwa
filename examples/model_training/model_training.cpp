@@ -90,9 +90,12 @@ void loadAndRead() {
     if((error = network.loadFromFile(infile)) == NO_ERROR)
         cout << "Model loaded successfully!" << endl;
     else {
-        cout << "Something went wrong loading model file." << error << endl;
+        cout << "Something went wrong loading model file." endl;
         exit(0);
     }
+
+    // Close the input trained model file
+    infile.close();
 
     double testInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
     cout << "Testing inferences... " << endl;
