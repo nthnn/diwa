@@ -29,6 +29,7 @@
 
 #include <diwa.h>
 
+/** @cond */
 typedef union {
     double d;
     uint8_t b[8];
