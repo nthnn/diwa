@@ -1,0 +1,33 @@
+name: Arduino CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+
+      - name: Install Python serial library
+        run: python3 -m pip install pyserial
+
+      - name: Arduino ESP32 Platform Installation
+        run: arduino-cli core install esp32:esp32
+
+      - name: Build Arduino library
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/model_on_sd/model_on_sd.ino
+          arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/xor_example/xor_example.ino
