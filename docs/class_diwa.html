@@ -127,6 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aafbb6e742fabf31fe09fa9d3158e558b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#aafbb6e742fabf31fe09fa9d3158e558b">saveToFile</a> (std::ofstream &amp;annFile)</td></tr>
 <tr class="memdesc:aafbb6e742fabf31fe09fa9d3158e558b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save neural network model to file in non-Arduino environment.  <br /></td></tr>
 <tr class="separator:aafbb6e742fabf31fe09fa9d3158e558b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a22d9a6ed4e81f2f9d6b6845f0d076866">calculateAccuracy</a> (double *testInput, double *testExpectedOutput, int epoch)</td></tr>
+<tr class="memdesc:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the accuracy of the neural network on test data.  <br /></td></tr>
+<tr class="separator:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9334d8e482d97c52ddfe7137257b2f7c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a9334d8e482d97c52ddfe7137257b2f7c">calculateLoss</a> (double *testInput, double *testExpectedOutput, int epoch)</td></tr>
+<tr class="memdesc:a9334d8e482d97c52ddfe7137257b2f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the loss of the neural network on test data.  <br /></td></tr>
+<tr class="separator:a9334d8e482d97c52ddfe7137257b2f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8474411623a6e505b6472ed08cf442d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#ab8474411623a6e505b6472ed08cf442d">setActivationFunction</a> (<a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a> activation)</td></tr>
 <tr class="memdesc:ab8474411623a6e505b6472ed08cf442d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the activation function for the neural network.  <br /></td></tr>
 <tr class="separator:ab8474411623a6e505b6472ed08cf442d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,6 +186,98 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a22d9a6ed4e81f2f9d6b6845f0d076866" name="a22d9a6ed4e81f2f9d6b6845f0d076866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d9a6ed4e81f2f9d6b6845f0d076866">&#9670;&#160;</a></span>calculateAccuracy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Diwa::calculateAccuracy </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>testInput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>testExpectedOutput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>epoch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the accuracy of the neural network on test data. </p>
+<p>This function calculates the accuracy of the neural network on a given set of test data. It compares the inferred output with the expected output for each test sample and calculates the percentage of correct inferences.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">testInput</td><td>Pointer to the input values of the test data. </td></tr>
+    <tr><td class="paramname">testExpectedOutput</td><td>Pointer to the expected output values of the test data. </td></tr>
+    <tr><td class="paramname">epoch</td><td>Total number of test samples in the test data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The accuracy of the neural network on the test data as a percentage. </dd></dl>
+
+</div>
+</div>
+<a id="a9334d8e482d97c52ddfe7137257b2f7c" name="a9334d8e482d97c52ddfe7137257b2f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9334d8e482d97c52ddfe7137257b2f7c">&#9670;&#160;</a></span>calculateLoss()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Diwa::calculateLoss </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>testInput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>testExpectedOutput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>epoch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the loss of the neural network on test data. </p>
+<p>This function calculates the loss of the neural network on a given set of test data. It computes the percentage of test samples for which the inferred output does not match the expected output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">testInput</td><td>Pointer to the input values of the test data. </td></tr>
+    <tr><td class="paramname">testExpectedOutput</td><td>Pointer to the expected output values of the test data. </td></tr>
+    <tr><td class="paramname">epoch</td><td>Total number of test samples in the test data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The loss of the neural network on the test data as a percentage. </dd></dl>
+
+</div>
+</div>
 <a id="a410c77ad562f6e49f9d79c4fde37ac3d" name="a410c77ad562f6e49f9d79c4fde37ac3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a410c77ad562f6e49f9d79c4fde37ac3d">&#9670;&#160;</a></span>getActivationFunction()</h2>
 

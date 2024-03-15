@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['inference_0',['inference',['../class_diwa.html#a0677924dfd094ccc8f295feb896d96a7',1,'Diwa']]],
-  ['initialize_1',['initialize',['../class_diwa.html#a9647345843529f26c7ec3959697d73e0',1,'Diwa']]]
+  ['gaussian_0',['gaussian',['../class_diwa_activation_func.html#a3f6893bca239e761c9429090503c1b0d',1,'DiwaActivationFunc']]],
+  ['getactivationfunction_1',['getActivationFunction',['../class_diwa.html#a410c77ad562f6e49f9d79c4fde37ac3d',1,'Diwa']]]
 ];

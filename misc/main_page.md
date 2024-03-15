@@ -7,6 +7,7 @@
     <h1>%Diwa: Tiny AI/ML Library</h1>
 </div>
 
+![GCC Build CI](https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg)
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg)
 ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.2-red?logo=Arduino)
