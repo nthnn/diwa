@@ -499,7 +499,7 @@ DiwaError Diwa::saveToFile(std::ofstream& annFile) {
 
 #endif
 
-bool Diwa::testInference(double *testInput, double *testExpectedOutput) {
+inline bool Diwa::testInference(double *testInput, double *testExpectedOutput) {
     double* testInference = this->inference(testInput);
     bool correctOutput = true;
 
