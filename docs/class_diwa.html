@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('class_diwa.html',''); initResizable();
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_diwa-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Diwa Class Reference</div></div>
+  <div class="headertitle"><div class="title">Diwa Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -127,6 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aafbb6e742fabf31fe09fa9d3158e558b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#aafbb6e742fabf31fe09fa9d3158e558b">saveToFile</a> (std::ofstream &amp;annFile)</td></tr>
 <tr class="memdesc:aafbb6e742fabf31fe09fa9d3158e558b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save neural network model to file in non-Arduino environment.  <br /></td></tr>
 <tr class="separator:aafbb6e742fabf31fe09fa9d3158e558b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8474411623a6e505b6472ed08cf442d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#ab8474411623a6e505b6472ed08cf442d">setActivationFunction</a> (<a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a> activation)</td></tr>
+<tr class="memdesc:ab8474411623a6e505b6472ed08cf442d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the activation function for the neural network.  <br /></td></tr>
+<tr class="separator:ab8474411623a6e505b6472ed08cf442d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a410c77ad562f6e49f9d79c4fde37ac3d">getActivationFunction</a> () const</td></tr>
+<tr class="memdesc:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current activation function used by the neural network.  <br /></td></tr>
+<tr class="separator:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers. </p>
@@ -174,6 +180,28 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a410c77ad562f6e49f9d79c4fde37ac3d" name="a410c77ad562f6e49f9d79c4fde37ac3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a410c77ad562f6e49f9d79c4fde37ac3d">&#9670;&#160;</a></span>getActivationFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a> Diwa::getActivationFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves the current activation function used by the neural network. </p>
+<p>This method returns the activation function currently set for the neurons in the neural network. It allows the user to query the current activation function being used for inference and training purposes. The activation function determines the output of a neuron based on its input. Different activation functions can be used depending on the nature of the problem being solved and the characteristics of the dataset. Common activation functions include sigmoid, ReLU, and tanh.</p>
+<dl class="section return"><dt>Returns</dt><dd>The activation function currently set for the neural network. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_diwa.html#ab8474411623a6e505b6472ed08cf442d" title="Sets the activation function for the neural network.">Diwa::setActivationFunction()</a> </dd></dl>
+
+</div>
+</div>
 <a id="a0677924dfd094ccc8f295feb896d96a7" name="a0677924dfd094ccc8f295feb896d96a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0677924dfd094ccc8f295feb896d96a7">&#9670;&#160;</a></span>inference()</h2>
 
@@ -315,6 +343,34 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>DiwaError indicating the saving status. </dd></dl>
+
+</div>
+</div>
+<a id="ab8474411623a6e505b6472ed08cf442d" name="ab8474411623a6e505b6472ed08cf442d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8474411623a6e505b6472ed08cf442d">&#9670;&#160;</a></span>setActivationFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Diwa::setActivationFunction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a>&#160;</td>
+          <td class="paramname"><em>activation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the activation function for the neural network. </p>
+<p>This method allows the user to set the activation function used by the neurons in the neural network. The activation function determines the output of a neuron based on its input. Different activation functions can be used depending on the nature of the problem being solved and the characteristics of the dataset. Common activation functions include sigmoid, ReLU, and tanh.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">activation</td><td>The activation function to be set for the neural network. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_diwa.html#a410c77ad562f6e49f9d79c4fde37ac3d" title="Retrieves the current activation function used by the neural network.">Diwa::getActivationFunction()</a> </dd></dl>
 
 </div>
 </div>

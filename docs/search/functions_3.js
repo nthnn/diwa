@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['savetofile_0',['saveToFile',['../class_diwa.html#aafbb6e742fabf31fe09fa9d3158e558b',1,'Diwa']]]
+  ['loadfromfile_0',['loadFromFile',['../class_diwa.html#a371512f843adf6d0ea6c70581224d311',1,'Diwa']]]
 ];
