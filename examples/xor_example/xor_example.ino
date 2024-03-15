@@ -42,6 +42,28 @@ void setup() {
         network.train(6, trainingInput[1], trainingOutput[1]);
         network.train(6, trainingInput[2], trainingOutput[2]);
         network.train(6, trainingInput[3], trainingOutput[3]);
+
+        // Show accuracy and loss on training for every 100th epoch
+        if(epoch % 500 == 0) {
+            double accuracy = 0.0, loss = 0.0;
+
+            // Calculate accuracy and loss for each training sample
+            for(uint8_t i = 0; i < 4; i++) {
+                accuracy += network.calculateAccuracy(trainingInput[i], trainingOutput[i], 3);
+                loss += network.calculateLoss(trainingInput[i], trainingOutput[i], 3);
+            }
+
+            // Average accuracy and loss over all samples
+            accuracy /= 4, loss /= 4;
+
+            Serial.print("Epoch: ");
+            Serial.print(epoch);
+            Serial.print(", Accuracy: ");
+            Serial.print(accuracy * 100);
+            Serial.print("%, Loss: ");
+            Serial.print(loss * 100);
+            Serial.println("%");
+        }
     }
 
     // Perform inference on the trained network and print the results
