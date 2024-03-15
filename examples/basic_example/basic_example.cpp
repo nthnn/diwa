@@ -41,15 +41,36 @@ int main() {
     }
 
     // Train the neural network for a certain number of epochs
-    for(int epoch = 0; epoch < 5000; epoch++) {
+    cout << "Starting neural network training... " << endl;
+    for(int epoch = 0; epoch < 3000; epoch++) {
         // Iterate through each input-output pair and train the network
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
         network.train(6, trainingInput[2], trainingOutput[2]);
         network.train(6, trainingInput[3], trainingOutput[3]);
+
+        // Show accuracy and loss on training for every 100th epoch
+        if(epoch % 500 == 0) {
+            double accuracy = 0.0, loss = 0.0;
+
+            // Calculate accuracy and loss for each training sample
+            for(uint8_t i = 0; i < 4; i++) {
+                accuracy += network.calculateAccuracy(trainingInput[i], trainingOutput[i], 3);
+                loss += network.calculateLoss(trainingInput[i], trainingOutput[i], 3);
+            }
+
+            // Average accuracy and loss over all samples
+            accuracy /= 4, loss /= 4;
+
+            cout << "Epoch: " << epoch <<
+                ", Accuracy: " << (accuracy * 100) <<
+                "%, Loss: " << (loss * 100) << "%" << endl;
+        }
     }
+    cout << "Training done!" << endl;
 
     // Perform inference for each input and print the output
+    cout << "Testing neural network inferences..." << endl;
     for(uint8_t i = 0; i < 4; i++) {
         double* row = trainingInput[i];  // Get the current input row
         double* inferred = network.inference(row);  // Perform inference using the neural network
