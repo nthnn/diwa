@@ -121,6 +121,19 @@ private:
     */
     DiwaError initializeWeights();
 
+    /**
+     * @brief Tests the inference of the neural network for a given input.
+     *
+     * This function tests the output of the neural network for a given input
+     * against the expected output. It checks whether the inferred output matches
+     * the expected output for each output neuron.
+     *
+     * @param testInput Pointer to the input values for testing.
+     * @param testExpectedOutput Pointer to the expected output values for testing.
+     * @return True if the inferred output matches the expected output for all output neurons, false otherwise.
+     */
+    bool testInference(double *testInput, double *testExpectedOutput);
+
 public:
     /**
      * @brief Default constructor for the Diwa class.
@@ -248,6 +261,36 @@ public:
     DiwaError saveToFile(std::ofstream& annFile);
 
     #endif
+
+    /**
+     * @brief Calculates the accuracy of the neural network on test data.
+     *
+     * This function calculates the accuracy of the neural network on a given
+     * set of test data. It compares the inferred output with the expected output
+     * for each test sample and calculates the percentage of correct inferences.
+     *
+     * @param testInput Pointer to the input values of the test data.
+     * @param testExpectedOutput Pointer to the expected output values of the test data.
+     * @param epoch Total number of test samples in the test data.
+     * 
+     * @return The accuracy of the neural network on the test data as a percentage.
+     */
+    double calculateAccuracy(double *testInput, double *testExpectedOutput, int epoch);
+
+    /**
+     * @brief Calculates the loss of the neural network on test data.
+     *
+     * This function calculates the loss of the neural network on a given set
+     * of test data. It computes the percentage of test samples for which the
+     * inferred output does not match the expected output.
+     *
+     * @param testInput Pointer to the input values of the test data.
+     * @param testExpectedOutput Pointer to the expected output values of the test data.
+     * @param epoch Total number of test samples in the test data.
+     * 
+     * @return The loss of the neural network on the test data as a percentage.
+     */
+    double calculateLoss(double *testInput, double *testExpectedOutput, int epoch);
 
     /**
      * @brief Sets the activation function for the neural network.

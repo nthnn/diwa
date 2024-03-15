@@ -499,6 +499,35 @@ DiwaError Diwa::saveToFile(std::ofstream& annFile) {
 
 #endif
 
+bool Diwa::testInference(double *testInput, double *testExpectedOutput) {
+    double* testInference = this->inference(testInput);
+    bool correctOutput = true;
+
+    for(int j = 0; j < this->outputNeurons; j++)
+        if(testInference[j] < 0.5 && testExpectedOutput[j] != 0)
+            correctOutput = false;
+
+    return correctOutput;
+}
+
+double Diwa::calculateAccuracy(double *testInput, double *testExpectedOutput, int epoch) {
+    int correctInference = 0;
+    for(int i = 0; i < epoch; i++)
+        if(this->testInference(testInput, testExpectedOutput))
+            correctInference++;
+
+    return (double) correctInference / epoch;
+}
+
+double Diwa::calculateLoss(double *testInput, double *testExpectedOutput, int epoch) {
+    int correctInference = epoch;
+    for(int i = 0; i < epoch; i++)
+        if(!this->testInference(testInput, testExpectedOutput))
+            correctInference--;
+
+    return (double) correctInference / epoch;
+}
+
 void Diwa::setActivationFunction(diwa_activation activation) {
     this->activation = activation;
 }
