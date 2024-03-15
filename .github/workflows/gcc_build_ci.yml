@@ -1,0 +1,29 @@
+name: GCC Build CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Arduino Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Building example programs
+        run: |
+          mkdir -p dist
+          g++ -Isrc src/*.cpp -o dist/basic_example examples/basic_example/basic_example.cpp
+          g++ -Isrc src/*.cpp -o dist/model_training examples/model_training/model_training.cpp
+
+      - name: Run example programs
+        run:
+          ./dist/basic_example
+          ./dist/model_training
