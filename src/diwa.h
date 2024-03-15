@@ -107,18 +107,27 @@ private:
     diwa_activation activation; /**< Activation function to be used on inference */
 
     /**
-     * 
-     * @brief Randomize the weights in the network.
-     * 
+     * @brief Randomizes the weights in the neural network.
+     *
+     * This function randomizes the weights in the neural network to initialize them 
+     * with random values. It is typically used during the initialization of the 
+     * neural network to ensure that the weights start with diverse values, which 
+     * aids in learning and prevents convergence to local minima.
      */
     void randomizeWeights();
 
     /**
-     * 
-     * @brief Allocates memory for neural network weights.
-     * 
-     * @return DiwaError The corresponding DiwaError, if any.
-    */
+     * @brief Initializes memory for neural network weights.
+     *
+     * This function allocates memory for the weights of the neural network. It 
+     * initializes the memory space required to store the weights, which is determined 
+     * based on the architecture and parameters of the neural network. If memory allocation 
+     * fails, it returns an error code indicating the failure, allowing the calling code 
+     * to handle the error gracefully.
+     *
+     * @return DiwaError The corresponding DiwaError, if any. Returns NO_ERROR if memory 
+     * allocation is successful, or an appropriate error code otherwise.
+     */
     DiwaError initializeWeights();
 
     /**
