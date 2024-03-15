@@ -49,6 +49,7 @@
 #   include <stdint.h>
 #endif
 
+#include <diwa_activations.h>
 #include <math.h>
 
 /**
@@ -89,7 +90,7 @@ typedef enum {
  *       powerful platforms.
  * 
  */
-class Diwa {
+class Diwa final {
 private:
     int inputNeurons;   /**< Number of input neurons */
     int hiddenNeurons;  /**< Number of neurons in each hidden layer */
@@ -102,6 +103,8 @@ private:
     double *weights;     /**< Array to store weights */
     double *outputs;     /**< Array to store neuron outputs */
     double *deltas;      /**< Array to store delta values during training */
+
+    diwa_activation activation; /**< Activation function to be used on inference */
 
     /**
      * 
@@ -245,6 +248,33 @@ public:
     DiwaError saveToFile(std::ofstream& annFile);
 
     #endif
+
+    /**
+     * @brief Sets the activation function for the neural network.
+     *
+     * This method allows the user to set the activation function used by the neurons in the neural network.
+     * The activation function determines the output of a neuron based on its input. Different activation
+     * functions can be used depending on the nature of the problem being solved and the characteristics of
+     * the dataset. Common activation functions include sigmoid, ReLU, and tanh.
+     *
+     * @param activation The activation function to be set for the neural network.
+     * @see Diwa::getActivationFunction()
+     */
+    void setActivationFunction(diwa_activation activation);
+
+    /**
+     * @brief Retrieves the current activation function used by the neural network.
+     *
+     * This method returns the activation function currently set for the neurons in the neural network.
+     * It allows the user to query the current activation function being used for inference and training
+     * purposes. The activation function determines the output of a neuron based on its input. Different
+     * activation functions can be used depending on the nature of the problem being solved and the
+     * characteristics of the dataset. Common activation functions include sigmoid, ReLU, and tanh.
+     *
+     * @return The activation function currently set for the neural network.
+     * @see Diwa::setActivationFunction()
+     */
+    diwa_activation getActivationFunction() const;
 };
 
 #endif  // DIWA_H

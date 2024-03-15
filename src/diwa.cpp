@@ -35,13 +35,6 @@ typedef union {
     uint8_t b[8];
 } double_p;
 
-static inline double diwaSigmoid(double value) {
-    if(value < -45.0) return 0;
-    if(value > 45.0) return 1;
-
-    return 1.0 / (1.0 + exp(-value));
-}
-
 static inline uint8_t* intToU8a(int value) {
     uint8_t* bytes = new uint8_t[4];
 
@@ -98,6 +91,7 @@ static inline void writeToStream(std::ofstream& stream, const uint8_t* data, siz
 #endif
 
 Diwa::Diwa() {
+    this->activation = DiwaActivationFunc::sigmoid;
     this->initialize(0, 0, 0, 0);
 }
 
@@ -193,7 +187,7 @@ double* Diwa::inference(double *inputNeurons) {
 
             for(int k = 0; k < this->inputNeurons; ++k)
                 sum += *weights++ * inputs[k];
-            *outputs++ = diwaSigmoid(sum);
+            *outputs++ = this->activation(sum);
         }
 
         return returnValues;
@@ -204,7 +198,7 @@ double* Diwa::inference(double *inputNeurons) {
 
         for(int k = 0; k < this->inputNeurons; ++k)
             sum += *weights++ * inputs[k];
-        *outputs++ = diwaSigmoid(sum);
+        *outputs++ = this->activation(sum);
     }
 
     inputs += this->inputNeurons;
@@ -214,7 +208,7 @@ double* Diwa::inference(double *inputNeurons) {
             
             for(int k = 0; k < this->hiddenNeurons; ++k)
                 sum += *weights++ * inputs[k];
-            *outputs++ = diwaSigmoid(sum);
+            *outputs++ = this->activation(sum);
         }
 
         inputs += this->hiddenNeurons;
@@ -226,7 +220,7 @@ double* Diwa::inference(double *inputNeurons) {
 
         for(int k = 0; k < this->hiddenNeurons; ++k)
             sum += *weights++ * inputs[k];
-        *outputs++ = diwaSigmoid(sum);;
+        *outputs++ = this->activation(sum);;
     }
 
     return returnValue;
@@ -504,3 +498,11 @@ DiwaError Diwa::saveToFile(std::ofstream& annFile) {
 }
 
 #endif
+
+void Diwa::setActivationFunction(diwa_activation activation) {
+    this->activation = activation;
+}
+
+diwa_activation Diwa::getActivationFunction() const {
+    return this->activation;
+}
