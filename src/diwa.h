@@ -328,7 +328,34 @@ public:
      */
     diwa_activation getActivationFunction() const;
 
+    /**
+     * @brief Calculates the recommended number of hidden neurons based on the input and output neurons.
+     *
+     * This function computes the recommended number of hidden neurons for a neural network 
+     * based on the number of input and output neurons. The recommendation is calculated 
+     * using a heuristic formula that aims to strike a balance between model complexity 
+     * and generalization ability. The recommended number of hidden neurons is determined 
+     * as the square root of the product of the input and output neurons.
+     *
+     * @return The recommended number of hidden neurons, or -1 if the input or output neurons are non-positive.
+     */
     int recommendedHiddenNeuronCount();
+
+    /**
+     * @brief Calculates the recommended number of hidden layers based on the dataset size and complexity.
+     *
+     * This function computes the recommended number of hidden layers for a neural network 
+     * based on the size and complexity of the dataset. The recommendation is calculated 
+     * using a heuristic formula that takes into account the number of samples, input neurons, 
+     * output neurons, and a scaling factor alpha. The recommended number of hidden layers 
+     * is determined as the total number of samples divided by (alpha times the sum of input 
+     * and output neurons).
+     *
+     * @param numSamples The total number of samples in the dataset.
+     * @param alpha A scaling factor used to adjust the recommendation based on dataset complexity.
+     * 
+     * @return The recommended number of hidden layers, or -1 if any of the input parameters are non-positive.
+     */
     int recommendedHiddenLayerCount(int numSamples, int alpha);
 };
 
