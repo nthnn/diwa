@@ -139,6 +139,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a">diwa_activation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a410c77ad562f6e49f9d79c4fde37ac3d">getActivationFunction</a> () const</td></tr>
 <tr class="memdesc:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current activation function used by the neural network.  <br /></td></tr>
 <tr class="separator:a410c77ad562f6e49f9d79c4fde37ac3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee7f6dd835f93a7c88e890e5f329ccb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#aee7f6dd835f93a7c88e890e5f329ccb6">recommendedHiddenNeuronCount</a> ()</td></tr>
+<tr class="memdesc:aee7f6dd835f93a7c88e890e5f329ccb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the recommended number of hidden neurons based on the input and output neurons.  <br /></td></tr>
+<tr class="separator:aee7f6dd835f93a7c88e890e5f329ccb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8777a2d67f101047f7dfd6fb3d92bb01"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a8777a2d67f101047f7dfd6fb3d92bb01">recommendedHiddenLayerCount</a> (int numSamples, int alpha)</td></tr>
+<tr class="memdesc:a8777a2d67f101047f7dfd6fb3d92bb01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the recommended number of hidden layers based on the dataset size and complexity.  <br /></td></tr>
+<tr class="separator:a8777a2d67f101047f7dfd6fb3d92bb01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers. </p>
@@ -413,6 +419,66 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>DiwaError indicating the loading status. </dd></dl>
+
+</div>
+</div>
+<a id="a8777a2d67f101047f7dfd6fb3d92bb01" name="a8777a2d67f101047f7dfd6fb3d92bb01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8777a2d67f101047f7dfd6fb3d92bb01">&#9670;&#160;</a></span>recommendedHiddenLayerCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Diwa::recommendedHiddenLayerCount </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSamples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>alpha</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the recommended number of hidden layers based on the dataset size and complexity. </p>
+<p>This function computes the recommended number of hidden layers for a neural network based on the size and complexity of the dataset. The recommendation is calculated using a heuristic formula that takes into account the number of samples, input neurons, output neurons, and a scaling factor alpha. The recommended number of hidden layers is determined as the total number of samples divided by (alpha times the sum of input and output neurons).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSamples</td><td>The total number of samples in the dataset. </td></tr>
+    <tr><td class="paramname">alpha</td><td>A scaling factor used to adjust the recommendation based on dataset complexity.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The recommended number of hidden layers, or -1 if any of the input parameters are non-positive. </dd></dl>
+
+</div>
+</div>
+<a id="aee7f6dd835f93a7c88e890e5f329ccb6" name="aee7f6dd835f93a7c88e890e5f329ccb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee7f6dd835f93a7c88e890e5f329ccb6">&#9670;&#160;</a></span>recommendedHiddenNeuronCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Diwa::recommendedHiddenNeuronCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the recommended number of hidden neurons based on the input and output neurons. </p>
+<p>This function computes the recommended number of hidden neurons for a neural network based on the number of input and output neurons. The recommendation is calculated using a heuristic formula that aims to strike a balance between model complexity and generalization ability. The recommended number of hidden neurons is determined as the square root of the product of the input and output neurons.</p>
+<dl class="section return"><dt>Returns</dt><dd>The recommended number of hidden neurons, or -1 if the input or output neurons are non-positive. </dd></dl>
 
 </div>
 </div>
