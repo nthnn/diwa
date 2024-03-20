@@ -535,3 +535,23 @@ void Diwa::setActivationFunction(diwa_activation activation) {
 diwa_activation Diwa::getActivationFunction() const {
     return this->activation;
 }
+
+int Diwa::recommendedHiddenNeuronCount() {
+    if(this->inputNeurons <= 0 || this->outputNeurons <= 0)
+        return -1;
+
+    return sqrt(this->inputNeurons * this->outputNeurons);
+}
+
+int Diwa::recommendedHiddenLayerCount(int numSamples, int alpha) {
+    if(this->inputNeurons <= 0 ||
+        this->outputNeurons <= 0 ||
+        numSamples <= 0 || alpha <= 0)
+        return -1;
+
+    int count = numSamples / (alpha * (this->inputNeurons + this->outputNeurons));
+    if(count < 1)
+        return -1;
+
+    return count;
+}

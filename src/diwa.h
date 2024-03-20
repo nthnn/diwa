@@ -327,6 +327,9 @@ public:
      * @see Diwa::setActivationFunction()
      */
     diwa_activation getActivationFunction() const;
+
+    int recommendedHiddenNeuronCount();
+    int recommendedHiddenLayerCount(int numSamples, int alpha);
 };
 
 #endif  // DIWA_H
