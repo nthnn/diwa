@@ -10,7 +10,7 @@
 ![GCC Build CI](https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg)
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg)
 ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
-![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.2-red?logo=Arduino)
+![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.3-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
 %Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32 and similar development boards that has PSRAM with Arduino platform. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
