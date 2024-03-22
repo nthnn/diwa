@@ -117,7 +117,9 @@ DiwaError Diwa::initialize(
 
 DiwaError Diwa::initializeWeights() {
     #ifdef ARDUINO
-    this->weights = (double*) ps_malloc(sizeof(double) * (this->weightCount * this->neuronCount));
+    if(ESP.getFreePsram() > 0)
+        this->weights = (double*) ps_malloc(sizeof(double) * (this->weightCount * this->neuronCount));
+    else this->weights = (double*) malloc(sizeof(double) * (this->weightCount * this->neuronCount));
     #else
     this->weights = (double*) malloc(sizeof(double) * (this->weightCount * this->neuronCount));
     #endif
