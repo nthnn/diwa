@@ -1,8 +1,8 @@
 {
     "name": "diwa",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Lightweight simple implementation of Artificial Neural Network for microcontrollers",
-    "keywords": ["ANN", "Artificial Neural Network", "microcontrollers", "ESP8266", "ESP32"],
+    "keywords": ["ANN", "Artificial Neural Network", "microcontrollers", "ESP8266", "ESP32", "RP2040"],
     "repository": {
       "type": "git",
       "url": "https://github.com/nthnn/diwa"
@@ -17,5 +17,5 @@
     "license": "MIT",
     "homepage": "https://github.com/nthnn/diwa",
     "frameworks": "*",
-    "platforms": ["espressif32"]
+    "platforms": ["espressif32", "espressif8266", "rp2040"]
 }
