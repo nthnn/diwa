@@ -33,7 +33,12 @@ void setup() {
     // Create an instance of the Diwa neural network with 2 input neurons,
     // 1 hidden layer with 3 neurons, and 1 output neuron
     Diwa network;
-    network.initialize(2, 1, 3, 1);
+    if(network.initialize(2, 1, 3, 1) == NO_ERROR)
+        Serial.println("Done initializing neural network.");
+    else {
+        Serial.println("Something went wrong initializing neural network.");
+        while(true);
+    }
 
     // Train the network for 3000 epochs using the XOR training data
     for(uint32_t epoch = 0; epoch < 10000; epoch++) {
@@ -82,5 +87,5 @@ void setup() {
 }
 
 void loop() {
-  vTaskDelay(10);
+  delay(100);
 }

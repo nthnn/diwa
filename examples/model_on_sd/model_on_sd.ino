@@ -129,5 +129,5 @@ void setup() {
 }
 
 void loop() {
-  vTaskDelay(10);
+  delay(100);
 }
