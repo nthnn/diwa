@@ -1,4 +1,4 @@
-@mainpage Diwa AI/ML Library
+@mainpage %Diwa AI/ML Library
 @tableofcontents
 
 <div align="center">
