@@ -28,53 +28,7 @@
 #endif
 
 #include <diwa.h>
-
-/** @cond */
-typedef union {
-    double d;
-    uint8_t b[8];
-} double_p;
-
-static inline uint8_t* intToU8a(int value) {
-    uint8_t* bytes = new uint8_t[4];
-
-    bytes[0] = (value >> 0) & 0xFF;
-    bytes[1] = (value >> 8) & 0xFF;
-    bytes[2] = (value >> 16) & 0xFF;
-    bytes[3] = (value >> 24) & 0xFF;
-
-    return bytes;
-}
-
-static inline int u8aToInt(uint8_t bytes[4]) {
-    int result = 0;
-
-    result |= bytes[0];
-    result |= bytes[1] << 8;
-    result |= bytes[2] << 16;
-    result |= bytes[3] << 24;
-
-    return result;
-}
-
-static inline uint8_t* doubleToU8a(double value) {
-    double_p db;
-    db.d = value;
-
-    uint8_t* bytes = new uint8_t[8];
-    for(uint8_t i = 0; i < 8; ++i)
-        bytes[i] = db.b[i];
-
-    return bytes;
-}
-
-static inline double u8aToDouble(uint8_t bytes[8]) {
-    double_p db;
-    for(uint8_t i = 0; i < 8; ++i)
-        db.b[i] = bytes[i];
-
-    return db.d;
-}
+#include <diwa_conv.h>
 
 #ifndef ARDUINO
 
@@ -360,22 +314,22 @@ DiwaError Diwa::loadFromFile(File annFile) {
     uint8_t temp_int[4];
 
     annFile.read(temp_int, 4);
-    this->inputNeurons = u8aToInt(temp_int);
+    this->inputNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(temp_int, 4);
-    this->hiddenNeurons = u8aToInt(temp_int);
+    this->hiddenNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(temp_int, 4);
-    this->hiddenLayers = u8aToInt(temp_int);
+    this->hiddenLayers = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(temp_int, 4);
-    this->outputNeurons = u8aToInt(temp_int);
+    this->outputNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(temp_int, 4);
-    this->weightCount = u8aToInt(temp_int);
+    this->weightCount = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(temp_int, 4);
-    this->neuronCount = u8aToInt(temp_int);
+    this->neuronCount = DiwaConv::u8aToInt(temp_int);
 
     {
         DiwaError error;
@@ -395,7 +349,7 @@ DiwaError Diwa::loadFromFile(File annFile) {
     uint8_t temp_db[8];
     for(int i = 0; i < this->weightCount; i++) {
         annFile.read(temp_db, 8);
-        this->weights[i] = u8aToDouble(temp_db);
+        this->weights[i] = DiwaConv::u8aToDouble(temp_db);
     }
 
     return NO_ERROR;
@@ -435,22 +389,22 @@ DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     uint8_t temp_int[5];
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->inputNeurons = u8aToInt(temp_int);
+    this->inputNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->hiddenNeurons = u8aToInt(temp_int);
+    this->hiddenNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->hiddenLayers = u8aToInt(temp_int);
+    this->hiddenLayers = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->outputNeurons = u8aToInt(temp_int);
+    this->outputNeurons = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->weightCount = u8aToInt(temp_int);
+    this->weightCount = DiwaConv::u8aToInt(temp_int);
 
     annFile.read(reinterpret_cast<char*>(temp_int), 4);
-    this->neuronCount = u8aToInt(temp_int);
+    this->neuronCount = DiwaConv::u8aToInt(temp_int);
 
     {
         DiwaError error;
@@ -470,7 +424,7 @@ DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     uint8_t temp_db[9];
     for(int i = 0; i < this->weightCount; i++) {
         annFile.read(reinterpret_cast<char*>(temp_db), 8);
-        this->weights[i] = u8aToDouble(temp_db);
+        this->weights[i] = DiwaConv::u8aToDouble(temp_db);
     }
 
     return NO_ERROR;
@@ -483,16 +437,16 @@ DiwaError Diwa::saveToFile(std::ofstream& annFile) {
     const uint8_t* magic_signature = new uint8_t[4] {'d', 'i', 'w', 'a'};
     writeToStream(annFile, magic_signature, 4);
 
-    writeToStream(annFile, intToU8a(this->inputNeurons), 4);
-    writeToStream(annFile, intToU8a(this->hiddenNeurons), 4);
-    writeToStream(annFile, intToU8a(this->hiddenLayers), 4);
-    writeToStream(annFile, intToU8a(this->outputNeurons), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->inputNeurons), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->hiddenNeurons), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->hiddenLayers), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->outputNeurons), 4);
 
-    writeToStream(annFile, intToU8a(this->weightCount), 4);
-    writeToStream(annFile, intToU8a(this->neuronCount), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->weightCount), 4);
+    writeToStream(annFile, DiwaConv::intToU8a(this->neuronCount), 4);
 
     for(int i = 0; i < this->weightCount; i++)
-        writeToStream(annFile, doubleToU8a(this->weights[i]), 8);
+        writeToStream(annFile, DiwaConv::doubleToU8a(this->weights[i]), 8);
 
     return NO_ERROR;
 }
