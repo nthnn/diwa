@@ -106,6 +106,12 @@ $(document).ready(function(){initNavTree('class_diwa_activation_func.html',''); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e472988fd78fb8511aa5d2181dc98a6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa_activation_func.html#a2e472988fd78fb8511aa5d2181dc98a6">initializeRadialBasis</a> (double center, double width)</td></tr>
+<tr class="memdesc:a2e472988fd78fb8511aa5d2181dc98a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the parameters for the radial basis function.  <br /></td></tr>
+<tr class="separator:a2e472988fd78fb8511aa5d2181dc98a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177590ca0d50b8c3f6a6248ccae6d736"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa_activation_func.html#a177590ca0d50b8c3f6a6248ccae6d736">radialBasis</a> (double x)</td></tr>
+<tr class="memdesc:a177590ca0d50b8c3f6a6248ccae6d736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the output of the radial basis function.  <br /></td></tr>
+<tr class="separator:a177590ca0d50b8c3f6a6248ccae6d736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bbe0cebbd05a932631b3c5ae2e22caf"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa_activation_func.html#a4bbe0cebbd05a932631b3c5ae2e22caf">sigmoid</a> (double x)</td></tr>
 <tr class="memdesc:a4bbe0cebbd05a932631b3c5ae2e22caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sigmoid activation function.  <br /></td></tr>
 <tr class="separator:a4bbe0cebbd05a932631b3c5ae2e22caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +156,88 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The transformed output value after applying the gaussian function. </dd></dl>
+
+</div>
+</div>
+<a id="a2e472988fd78fb8511aa5d2181dc98a6" name="a2e472988fd78fb8511aa5d2181dc98a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e472988fd78fb8511aa5d2181dc98a6">&#9670;&#160;</a></span>initializeRadialBasis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void DiwaActivationFunc::initializeRadialBasis </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>center</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>width</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the parameters for the radial basis function. </p>
+<p>This method initializes the parameters for the radial basis function used in the neural network. It sets the center and region parameters, which affect the shape and behavior of the radial basis function. This method should be called before using the radial basis function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">center</td><td>The center parameter for the radial basis function. </td></tr>
+    <tr><td class="paramname">width</td><td>The width parameter for the radial basis function, which determines the spread of the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a177590ca0d50b8c3f6a6248ccae6d736" name="a177590ca0d50b8c3f6a6248ccae6d736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177590ca0d50b8c3f6a6248ccae6d736">&#9670;&#160;</a></span>radialBasis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double DiwaActivationFunc::radialBasis </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Computes the output of the radial basis function. </p>
+<p>This method computes the output of the radial basis function for a given input value. The radial basis function produces a bell-shaped curve centered around a specified center parameter. The width of the curve is determined by the region parameter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The input value to the radial basis function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The output value of the radial basis function for the given input. </dd></dl>
 
 </div>
 </div>
