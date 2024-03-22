@@ -359,16 +359,16 @@ DiwaError Diwa::saveToFile(File annFile) {
     const uint8_t* magic_signature = new uint8_t[4] {'d', 'i', 'w', 'a'};
     annFile.write(magic_signature, 4);
 
-    annFile.write(intToU8a(this->inputNeurons), 4);
-    annFile.write(intToU8a(this->hiddenNeurons), 4);
-    annFile.write(intToU8a(this->hiddenLayers), 4);
-    annFile.write(intToU8a(this->outputNeurons), 4);
+    annFile.write(DiwaConv::intToU8a(this->inputNeurons), 4);
+    annFile.write(DiwaConv::intToU8a(this->hiddenNeurons), 4);
+    annFile.write(DiwaConv::intToU8a(this->hiddenLayers), 4);
+    annFile.write(DiwaConv::intToU8a(this->outputNeurons), 4);
 
-    annFile.write(intToU8a(this->weightCount), 4);
-    annFile.write(intToU8a(this->neuronCount), 4);
+    annFile.write(DiwaConv::intToU8a(this->weightCount), 4);
+    annFile.write(DiwaConv::intToU8a(this->neuronCount), 4);
 
     for(int i = 0; i < this->weightCount; i++)
-        annFile.write(doubleToU8a(this->weights[i]), 8);
+        annFile.write(DiwaConv::doubleToU8a(this->weights[i]), 8);
 
     annFile.flush();
     return NO_ERROR;
