@@ -25,7 +25,9 @@ jobs:
         run: python3 -m pip install pyserial
 
       - name: Arduino CLI Core Index Update
-        run: arduino-cli core update-index
+        run: |
+          arduino-cli config init
+          arduino-cli core update-index
 
       - name: Arduino ESP8266 Platform Installation
         run: arduino-cli core install esp8266:esp8266
