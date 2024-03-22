@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-#if defined(ARDUINO) && (defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266))
+#if defined(ARDUINO) && defined(ARDUINO_ARCH_ESP32)
 #   include <bootloader_random.h>
 #else
 #   include <cstring>
@@ -75,7 +75,7 @@ DiwaError Diwa::initialize(
         outputNeurons == 0)
         return NO_ERROR;
 
-    #if defined(ARDUINO) && (defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266))
+    #if defined(ARDUINO) && defined(ARDUINO_ARCH_ESP32) 
     bootloader_random_enable();
     randomSeed(esp_random());
     bootloader_random_disable();
