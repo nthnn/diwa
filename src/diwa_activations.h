@@ -44,6 +44,7 @@
 #ifndef DIWA_ACTIVATIONS_H
 #define DIWA_ACTIVATIONS_H
 
+#include <diwa_conv.h>
 #include <math.h>
 
 #define DIWA_ACTFUNC_LOWER_BOUND -30.0f /**< Lower bound for input values to prevent overflow. */
@@ -65,7 +66,43 @@ typedef double (*diwa_activation)(double);
  * output value of a neuron. Supported activation functions include sigmoid and gaussian functions.
  */
 class DiwaActivationFunc final {
+private:
+    static inline double region = 2.0f; /**< The region parameter for the radial basis function. */
+    static inline double center = 0.0f; /**< The center parameter for the radial basis function. */
+
 public:
+    /**
+     * @brief Initializes the parameters for the radial basis function.
+     *
+     * This method initializes the parameters for the radial basis function used in the neural network.
+     * It sets the center and region parameters, which affect the shape and behavior of the radial basis
+     * function. This method should be called before using the radial basis function.
+     *
+     * @param center The center parameter for the radial basis function.
+     * @param width The width parameter for the radial basis function, which determines the spread of the function.
+     */
+    static inline void initializeRadialBasis(double center, double width) {
+        DiwaActivationFunc::center = center;
+        DiwaActivationFunc::region = 2 * pow(width, 2);
+    }
+
+    /**
+     * @brief Computes the output of the radial basis function.
+     *
+     * This method computes the output of the radial basis function for a given input value.
+     * The radial basis function produces a bell-shaped curve centered around a specified center
+     * parameter. The width of the curve is determined by the region parameter.
+     *
+     * @param x The input value to the radial basis function.
+     * @return The output value of the radial basis function for the given input.
+     */
+    static inline double radialBasis(double x) {
+        return exp(
+            -pow(x - DiwaActivationFunc::center, 2)
+                / DiwaActivationFunc::region
+        );
+    }
+
     /**
      * @brief Sigmoid activation function.
      *
