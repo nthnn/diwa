@@ -50,5 +50,5 @@ jobs:
 
       - name: Build Arduino library on RP2040
         run: |
-          arduino-cli compile --fqbn arduino:mbed_rp2040:pico --library src --build-path build examples/model_on_sd/model_on_sd.ino
-          arduino-cli compile --fqbn arduino:mbed_rp2040:pico --library src --build-path build examples/xor_example/xor_example.ino
+          arduino-cli compile --fqbn rp2040:rp2040:rpipico --library src --build-path build examples/model_on_sd/model_on_sd.ino
+          arduino-cli compile --fqbn rp2040:rp2040:rpipico --library src --build-path build examples/xor_example/xor_example.ino
