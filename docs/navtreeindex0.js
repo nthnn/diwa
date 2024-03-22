@@ -33,6 +33,7 @@ var NAVTREEINDEX0 =
 "diwa__activations_8h.html#aafa05ac5c062e638690c6449f8e1d76a":[2,0,0,1,3],
 "diwa__activations_8h.html#aec742b543a716ae82c16c211320bb761":[2,0,0,1,1],
 "diwa__activations_8h_source.html":[2,0,0,1],
+"diwa__conv_8h.html":[2,0,0,2],
 "diwa__conv_8h_source.html":[2,0,0,2],
 "files.html":[2,0],
 "functions.html":[1,2,0],
