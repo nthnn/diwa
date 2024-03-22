@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-#ifdef ARDUINO
+#if defined(ARDUINO) && (defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266))
 #   include <bootloader_random.h>
 #else
 #   include <cstring>
@@ -75,10 +75,7 @@ DiwaError Diwa::initialize(
         outputNeurons == 0)
         return NO_ERROR;
 
-    #ifdef ARDUINO
-    if(ESP.getFreePsram() == 0)
-        return NO_ESP_PSRAM;
-
+    #if defined(ARDUINO) && (defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266))
     bootloader_random_enable();
     randomSeed(esp_random());
     bootloader_random_disable();
@@ -116,8 +113,8 @@ DiwaError Diwa::initialize(
 }
 
 DiwaError Diwa::initializeWeights() {
-    #ifdef ARDUINO
-    if(ESP.getFreePsram() > 0)
+    #if defined(ARDUINO) && defined(ARDUINO_ARCH_ESP32)
+    if(psramFound())
         this->weights = (double*) ps_malloc(sizeof(double) * (this->weightCount * this->neuronCount));
     else this->weights = (double*) malloc(sizeof(double) * (this->weightCount * this->neuronCount));
     #else

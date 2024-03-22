@@ -66,10 +66,6 @@ typedef enum {
     INVALID_MAGIC_NUMBER,   /**< Invalid magic number */
     STREAM_NOT_OPEN,        /**< Stream not open */
     MALLOC_FAILED,          /**< Memory allocation failed */
-
-    #ifdef ARDUINO
-    NO_ESP_PSRAM            /**< ESP PSRAM not available */
-    #endif
 } DiwaError;
 
 /**
