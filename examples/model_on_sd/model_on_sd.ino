@@ -118,11 +118,13 @@ void setup() {
         while(true);
     }
 
+    #if defined(ARDUINO_ARCH_ESP32)
     // Check the ESP32 PSRAM to initialize
     if(!psramInit()) {
         Serial.println("Cannot initialize PSRAM.");
         while(true);
     }
+    #endif
 
     trainAndSave(); // Train the neural network and save the trained model
     loadAndRead();  // Load the trained model and perform inference
