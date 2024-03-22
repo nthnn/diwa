@@ -13,13 +13,13 @@
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.3-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
-%Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32 and similar development boards specially boards with PSRAM. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
+%Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM). It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
 
 %Diwa stands out as a straightforward and effective solution for implementing artificial neural networks on microcontrollers. Key features include:
 
 - **Lightweight**: Designed for resource-constrained microcontroller environments yet can still be used within non-Arduino environments.
 - **Simple Implementation**: Provides a basic yet effective implementation of a Feedforward ANN.
-- **Easy Integration**: Suitable for microcontrollers like ESP32 and similar boards with PSRAM.
+- **Easy Integration**: Suitable for microcontrollers like ESP8266, ESP32, and RP2040.
 - **Training Support**: Includes methods for training the neural network using backpropagation.
 
 > %Diwa is primarily intended for lightweight applications. For more intricate tasks, consider using advanced machine learning libraries on more powerful platforms.
@@ -61,7 +61,12 @@ void setup() {
     // Create an instance of the Diwa neural network with 2 input neurons,
     // 1 hidden layer with 3 neurons, and 1 output neuron
     Diwa network;
-    network.initialize(2, 1, 3, 1);
+    if(network.initialize(2, 1, 3, 1) == NO_ERROR)
+        Serial.println("Done initializing neural network.");
+    else {
+        Serial.println("Something went wrong initializing neural network.");
+        while(true);
+    }
 
     // Train the network for 3000 epochs using the XOR training data
     for(uint32_t epoch = 0; epoch < 10000; epoch++) {
@@ -88,7 +93,7 @@ void setup() {
 }
 
 void loop() {
-  vTaskDelay(10);
+  delay(10);
 }
 ```
 
