@@ -24,10 +24,29 @@ jobs:
       - name: Install Python serial library
         run: python3 -m pip install pyserial
 
+      - name: Arduino CLI Core Index Update
+        run: arduino-cli core update-index
+
+      - name: Arduino ESP8266 Platform Installation
+        run: arduino-cli core install esp8266:esp8266
+
       - name: Arduino ESP32 Platform Installation
         run: arduino-cli core install esp32:esp32
 
-      - name: Build Arduino library
+      - name: Arduino RP2040 Platform Installation
+        run: arduino-cli core install arduino:mbed_rp2040
+
+      - name: Build Arduino library on ESP8266
+        run: |
+          arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --library src --build-path build examples/model_on_sd/model_on_sd.ino
+          arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --library src --build-path build examples/xor_example/xor_example.ino
+
+      - name: Build Arduino library on ESP32
         run: |
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/model_on_sd/model_on_sd.ino
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/xor_example/xor_example.ino
+
+      - name: Build Arduino library on RP2040
+        run: |
+          arduino-cli compile --fqbn arduino:mbed_rp2040:pico --library src --build-path build examples/model_on_sd/model_on_sd.ino
+          arduino-cli compile --fqbn arduino:mbed_rp2040:pico --library src --build-path build examples/xor_example/xor_example.ino
