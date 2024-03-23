@@ -1,6 +1,6 @@
 {
     "name": "diwa",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Lightweight simple implementation of Artificial Neural Network for microcontrollers",
     "keywords": ["ANN", "Artificial Neural Network", "microcontrollers", "ESP8266", "ESP32", "RP2040"],
     "repository": {
