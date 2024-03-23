@@ -25,14 +25,14 @@
 #   include <bootloader_random.h>
 #endif
 
-#if defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)
+#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
 #   include <cstring>
 #endif
 
 #include <diwa.h>
 #include <diwa_conv.h>
 
-#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
+#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
 
 static inline void writeToStream(std::ofstream& stream, const uint8_t* data, size_t size) {
     for(size_t i = 0; i < size; i++)
@@ -375,7 +375,7 @@ DiwaError Diwa::saveToFile(File annFile) {
     return NO_ERROR;
 }
 
-#elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
+#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
 
 DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     if(!annFile.is_open())
