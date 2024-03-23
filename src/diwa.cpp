@@ -375,7 +375,7 @@ DiwaError Diwa::saveToFile(File annFile) {
     return NO_ERROR;
 }
 
-#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
+#elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
 
 DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     if(!annFile.is_open())
