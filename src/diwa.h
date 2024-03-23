@@ -48,13 +48,15 @@
 #   else
 #       include <SD.h>
 #   endif
-#else
+#elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
 #   include <fstream>
-#   include <stdint.h>
+#   include <math.h>
+#elif defined(PSP)
+#   include <pspmath.h>
 #endif
 
 #include <diwa_activations.h>
-#include <math.h>
+#include <stdint.h>
 
 /**
  * @enum DiwaError
@@ -243,7 +245,7 @@ public:
      */
     DiwaError saveToFile(File annFile);
 
-    #else
+    #elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
 
     /**
      * @brief Load neural network model from file in non-Arduino environment.

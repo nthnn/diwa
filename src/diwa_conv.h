@@ -34,6 +34,8 @@
 #ifndef DIWA_UTIL_H
 #define DIWA_UTIL_H
 
+#include <stdint.h>
+
 /** @cond */
 typedef union {
     double d;
