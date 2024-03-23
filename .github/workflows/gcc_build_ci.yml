@@ -20,6 +20,6 @@ jobs:
           g++ -Isrc src/*.cpp -o dist/model_training examples/model_training/model_training.cpp
 
       - name: Run example programs
-        run:
+        run: |
           ./dist/basic_example
           ./dist/model_training
