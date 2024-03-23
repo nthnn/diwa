@@ -29,7 +29,7 @@ void trainAndSave() {
     Diwa network;
 
     // Open a file for writing the trained model
-    File outfile = SD.open("/model.ann", "w");
+    File outfile = SD.open(F("/model.ann"), F("w"));
 
     // Training data
     double trainingInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
@@ -37,24 +37,24 @@ void trainAndSave() {
 
     // Initialize the neural network with specified parameters
     if(network.initialize(2, 1, 3, 1) == NO_ERROR)
-        Serial.println("Done initializing neural network.");
+        Serial.println(F("Done initializing neural network."));
     else {
-        Serial.println("Something went wrong initializing neural network.");
+        Serial.println(F("Something went wrong initializing neural network."));
         while(true);
     }
 
     // Train the neural network
-    Serial.print("Training neural network... ");
+    Serial.print(F("Training neural network... "));
     for(int epoch = 0; epoch < 5000; epoch++) {
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
         network.train(6, trainingInput[2], trainingOutput[2]);
         network.train(6, trainingInput[3], trainingOutput[3]);
     }
-    Serial.println("done!");
+    Serial.println(F("done!"));
 
     // Test inferences
-    Serial.println("Testing inferences... ");
+    Serial.println(F("Testing inferences... "));
     for(uint8_t i = 0; i < 4; i++) {
         double* row = trainingInput[i];
         double* inferred = network.inference(row);
@@ -66,11 +66,11 @@ void trainAndSave() {
     }
 
     // Save trained model to file
-    Serial.print("Saving trained model to file... ");
+    Serial.print(F("Saving trained model to file... "));
     network.saveToFile(outfile);
 
     outfile.close();
-    Serial.println("done!");
+    Serial.println(F("done!"));
 }
 
 // Function to load a trained model from a file and perform inferences
@@ -79,13 +79,13 @@ void loadAndRead() {
     Diwa network;
 
     // Open the saved model file for reading
-    File infile = SD.open("/model.ann", "r");
+    File infile = SD.open(F("/model.ann"), F("r"));
 
     // Load the trained model from the file
     if(network.loadFromFile(infile) == NO_ERROR)
-        Serial.println("Model loaded successfully!");
+        Serial.println(F("Model loaded successfully!"));
     else {
-        Serial.println("Something went wrong loading model file.");
+        Serial.println(F("Something went wrong loading model file."));
         while(true);
     }
 
@@ -93,7 +93,7 @@ void loadAndRead() {
     infile.close();
 
     double testInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
-    Serial.println("Testing inferences... ");
+    Serial.println(F("Testing inferences... "));
 
     // Test inferences with new input data
     for(uint8_t i = 0; i < 4; i++) {
@@ -114,14 +114,14 @@ void setup() {
 
     // Initialize the SD card connected to ESP32 via SPI
     if(!SD.begin(5)) {
-        Serial.println("Something went wrong initializing SD card.");
+        Serial.println(F("Something went wrong initializing SD card."));
         while(true);
     }
 
     #if defined(ARDUINO_ARCH_ESP32)
     // Check the ESP32 PSRAM to initialize
     if(!psramInit()) {
-        Serial.println("Cannot initialize PSRAM.");
+        Serial.println(F("Cannot initialize PSRAM."));
         while(true);
     }
     #endif
