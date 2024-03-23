@@ -29,7 +29,7 @@ void trainAndSave() {
     Diwa network;
 
     // Open a file for writing the trained model
-    File outfile = SD.open(F("/model.ann"), F("w"));
+    File outfile = SD.open("/model.ann", "w");
 
     // Training data
     double trainingInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
@@ -79,7 +79,7 @@ void loadAndRead() {
     Diwa network;
 
     // Open the saved model file for reading
-    File infile = SD.open(F("/model.ann"), F("r"));
+    File infile = SD.open("/model.ann", "r");
 
     // Load the trained model from the file
     if(network.loadFromFile(infile) == NO_ERROR)
