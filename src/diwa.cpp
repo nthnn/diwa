@@ -23,7 +23,9 @@
 
 #if defined(ARDUINO) && defined(ARDUINO_ARCH_ESP32)
 #   include <bootloader_random.h>
-#else
+#endif
+
+#if !defined(ARDUINO)
 #   include <cstring>
 #endif
 
