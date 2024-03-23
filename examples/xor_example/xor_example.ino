@@ -34,13 +34,14 @@ void setup() {
     // 1 hidden layer with 3 neurons, and 1 output neuron
     Diwa network;
     if(network.initialize(2, 1, 3, 1) == NO_ERROR)
-        Serial.println("Done initializing neural network.");
+        Serial.println(F("Done initializing neural network."));
     else {
-        Serial.println("Something went wrong initializing neural network.");
+        Serial.println(F("Something went wrong initializing neural network."));
         while(true);
     }
 
     // Train the network for 3000 epochs using the XOR training data
+    Serial.println(F("Starting training..."));
     for(uint32_t epoch = 0; epoch < 10000; epoch++) {
         // Train the network for each set of input and target output values
         network.train(6, trainingInput[0], trainingOutput[0]);
@@ -49,7 +50,7 @@ void setup() {
         network.train(6, trainingInput[3], trainingOutput[3]);
 
         // Show accuracy and loss on training for every 100th epoch
-        if(epoch % 500 == 0) {
+        if(epoch % 1000 == 0) {
             double accuracy = 0.0, loss = 0.0;
 
             // Calculate accuracy and loss for each training sample
@@ -61,17 +62,20 @@ void setup() {
             // Average accuracy and loss over all samples
             accuracy /= 4, loss /= 4;
 
-            Serial.print("Epoch: ");
+            // Print the accuracy and loss
+            Serial.print(F("Epoch: "));
             Serial.print(epoch);
-            Serial.print(", Accuracy: ");
+            Serial.print(F(", accuracy: "));
             Serial.print(accuracy * 100);
-            Serial.print("%, Loss: ");
+            Serial.print(F("%, loss: "));
             Serial.print(loss * 100);
-            Serial.println("%");
+            Serial.println(F("%"));
         }
     }
+    Serial.println(F("Training done!"));
 
     // Perform inference on the trained network and print the results
+    Serial.println(F("Testing inferences..."));
     for(uint8_t i = 0; i < 4; i++) {
         // Get the current input row
         double* row = trainingInput[i];
@@ -87,5 +91,5 @@ void setup() {
 }
 
 void loop() {
-    delay(100);
+  vTaskDelay(10);
 }
