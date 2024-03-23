@@ -43,7 +43,11 @@
 
 #ifdef ARDUINO
 #   include <Arduino.h>
-#   include <FS.h>
+#   if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_RP2040)
+#       include <FS.h>
+#   else
+#       include <SD.h>
+#   endif
 #else
 #   include <fstream>
 #   include <stdint.h>
