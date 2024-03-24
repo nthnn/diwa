@@ -33,16 +33,14 @@ void setup() {
     // Create an instance of the Diwa neural network with 2 input neurons,
     // 1 hidden layer with 3 neurons, and 1 output neuron
     Diwa network;
-    if(network.initialize(2, 1, 3, 1) == NO_ERROR)
-        Serial.println(F("Done initializing neural network."));
-    else {
+    if(network.initialize(2, 1, 3, 1) != NO_ERROR) {
         Serial.println(F("Something went wrong initializing neural network."));
         while(true);
     }
 
     // Train the network for 3000 epochs using the XOR training data
     Serial.println(F("Starting training..."));
-    for(uint32_t epoch = 0; epoch < 10000; epoch++) {
+    for(uint32_t epoch = 0; epoch <= 5000; epoch++) {
         // Train the network for each set of input and target output values
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
@@ -50,7 +48,7 @@ void setup() {
         network.train(6, trainingInput[3], trainingOutput[3]);
 
         // Show accuracy and loss on training for every 100th epoch
-        if(epoch % 1000 == 0) {
+        if((epoch % 1000 == 0) || epoch == 5000) {
             double accuracy = 0.0, loss = 0.0;
 
             // Calculate accuracy and loss for each training sample
@@ -65,14 +63,14 @@ void setup() {
             // Print the accuracy and loss
             Serial.print(F("Epoch: "));
             Serial.print(epoch);
-            Serial.print(F(", accuracy: "));
+            Serial.print(F("\t| Accuracy: "));
             Serial.print(accuracy * 100);
-            Serial.print(F("%, loss: "));
+            Serial.print(F("%\t| Loss: "));
             Serial.print(loss * 100);
             Serial.println(F("%"));
         }
     }
-    Serial.println(F("Training done!"));
+    Serial.println(F("Training done!\r\n"));
 
     // Perform inference on the trained network and print the results
     Serial.println(F("Testing inferences..."));
@@ -85,7 +83,7 @@ void setup() {
 
         // Print the result for the current input
         char str[100];
-        sprintf(str, "Output for [%1.f, %1.f]: %1.f (%g)\n", row[0], row[1], inferred[0], inferred[0]);
+        sprintf(str, "\t[%g, %g]: %d (%g)\n", row[0], row[1], (inferred[0] >= 0.5), inferred[0]);
         Serial.print(str);
     }
 }
