@@ -10,23 +10,37 @@
 ![GCC Build CI](https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg)
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg)
 ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
-![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.4-red?logo=Arduino)
+![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.6-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
-%Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM). It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
+%Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (tested only on Windows OS) and even PSP gaming console. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
 
 %Diwa stands out as a straightforward and effective solution for implementing artificial neural networks on microcontrollers. Key features include:
 
 - **Lightweight**: Designed for resource-constrained microcontroller environments yet can still be used within non-Arduino environments.
 - **Simple Implementation**: Provides a basic yet effective implementation of a Feedforward ANN.
-- **Easy Integration**: Suitable for microcontrollers like ESP8266, ESP32, and RP2040.
+- **Easy Integration**: Suitable for microcontrollers like ESP8266, ESP32, and RP2040. Also compatible with desktop environments and even PSP gaming console.
 - **Training Support**: Includes methods for training the neural network using backpropagation.
 
 > %Diwa is primarily intended for lightweight applications. For more intricate tasks, consider using advanced machine learning libraries on more powerful platforms.
 
 See live demo on [Wokwi](https://wokwi.com/projects/387551593748039681).
 
+## Architecture/Platform Support
+
+Diwa are tested on the following architecture/platform:
+
+| Arch/Platform                              | Remarks                                              |
+|--------------------------------------------|------------------------------------------------------|
+| ✅ ESP32-WROOM<br/>✅ ESP32-WROVER        | NodeMCU DevKit                                        |
+| ✅ ESP8266                                | Wokwi Emulation                                       |
+| ✅ RP2040                                 | Raspberry Pi Zero                                     |
+| ✅ PSP                                    | PPSSPP Emulator                                       |
+| 🔼 AMD64                                  | Works on Windows, segmentation fault on Linux systems |
+
 ## Getting Started
+
+### On Arduino
 
 To start using %Diwa library in your Arduino projects, follow these simple steps:
 
@@ -46,7 +60,7 @@ To access the examples:
 2. Click on `File > Examples > diwa` to see the list of available examples.
 3. Upload the example sketch to your Arduino board and see the results in action.
 
-Here's a full example usage.
+Here's a full example usage for an Arduino environment.
 ```cpp
 #include <diwa.h>
 
