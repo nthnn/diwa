@@ -96,22 +96,25 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><ul><li class="level2"><a href="#autotoc_md0">Getting Started</a></li>
-<li class="level2"><a href="#autotoc_md1">Examples</a></li>
-<li class="level2"><a href="#autotoc_md2">Contribution and Feedback</a></li>
-<li class="level2"><a href="#autotoc_md3">License</a></li>
+<ul><ul><li class="level2"><a href="#autotoc_md0">Architecture/Platform Support</a></li>
+<li class="level2"><a href="#autotoc_md1">Getting Started</a><ul><li class="level3"><a href="#autotoc_md2">On Arduino</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md3">Examples</a></li>
+<li class="level2"><a href="#autotoc_md4">Contribution and Feedback</a></li>
+<li class="level2"><a href="#autotoc_md5">License</a></li>
 </ul>
 </ul>
 </div>
 <div class="textblock"><div align="center"> <img src="logo.png" alt="" width="200" class="inline"/> <br  />
  <h1>Diwa: Tiny AI/ML Library</h1>
-</div><div align="center"> </div><p><img src="https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg" alt="GCC Build CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg" alt="Arduino CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg" alt="Arduino Lint" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/Library%20Manager-v0.0.4-red?logo=Arduino" alt="Arduino Release" class="inline"/> <a href="https://github.com/nthnn/diwa/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" style="pointer-events: none;" class="inline"/></a></p>
-<p>Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM). It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.</p>
+</div><div align="center"> </div><p><img src="https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg" alt="GCC Build CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg" alt="Arduino CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg" alt="Arduino Lint" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/Library%20Manager-v0.0.6-red?logo=Arduino" alt="Arduino Release" class="inline"/> <a href="https://github.com/nthnn/diwa/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" style="pointer-events: none;" class="inline"/></a></p>
+<p>Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (tested only on Windows OS) and even PSP gaming console. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.</p>
 <p>Diwa stands out as a straightforward and effective solution for implementing artificial neural networks on microcontrollers. Key features include:</p>
 <ul>
 <li><b>Lightweight</b>: Designed for resource-constrained microcontroller environments yet can still be used within non-Arduino environments.</li>
 <li><b>Simple Implementation</b>: Provides a basic yet effective implementation of a Feedforward ANN.</li>
-<li><b>Easy Integration</b>: Suitable for microcontrollers like ESP8266, ESP32, and RP2040.</li>
+<li><b>Easy Integration</b>: Suitable for microcontrollers like ESP8266, ESP32, and RP2040. Also compatible with desktop environments and even PSP gaming console.</li>
 <li><b>Training Support</b>: Includes methods for training the neural network using backpropagation.</li>
 </ul>
 <blockquote class="doxtable">
@@ -119,7 +122,27 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </blockquote>
 <p>See live demo on <a href="https://wokwi.com/projects/387551593748039681">Wokwi</a>.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
+Architecture/Platform Support</h2>
+<p><a class="el" href="class_diwa.html" title="Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers.">Diwa</a> are tested on the following architecture/platform:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Arch/Platform   </th><th class="markdownTableHeadNone">Remarks    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ ESP32-WROOM<br  />
+✅ ESP32-WROVER   </td><td class="markdownTableBodyNone">NodeMCU DevKit    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ ESP8266   </td><td class="markdownTableBodyNone">Wokwi Emulation    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">✅ RP2040   </td><td class="markdownTableBodyNone">Raspberry Pi Zero    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ PSP   </td><td class="markdownTableBodyNone">PPSSPP Emulator    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">🔼 AMD64   </td><td class="markdownTableBodyNone">Works on Windows, segmentation fault on Linux systems   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md1"></a>
 Getting Started</h2>
+<h3><a class="anchor" id="autotoc_md2"></a>
+On Arduino</h3>
 <p>To start using Diwa library in your Arduino projects, follow these simple steps:</p>
 <ol type="1">
 <li>Download the Diwa library from the GitHub repository.</li>
@@ -132,7 +155,7 @@ Getting Started</h2>
 </li>
 <li>Launch the Arduino IDE.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md1"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Examples</h2>
 <p>To access the examples:</p>
 <ol type="1">
@@ -140,7 +163,7 @@ Examples</h2>
 <li>Click on <code>File &gt; Examples &gt; diwa</code> to see the list of available examples.</li>
 <li>Upload the example sketch to your Arduino board and see the results in action.</li>
 </ol>
-<p>Here's a full example usage. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="diwa_8h.html">diwa.h</a>&gt;</span></div>
+<p>Here's a full example usage for an Arduino environment. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="diwa_8h.html">diwa.h</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {</div>
 <div class="line">    <span class="comment">// Initialize serial communication with a baud rate of 115200</span></div>
@@ -213,18 +236,18 @@ Examples</h2>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">    delay(10);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclass_diwa_html"><div class="ttname"><a href="class_diwa.html">Diwa</a></div><div class="ttdoc">Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers.</div><div class="ttdef"><b>Definition</b> diwa.h:89</div></div>
-<div class="ttc" id="aclass_diwa_html_a0677924dfd094ccc8f295feb896d96a7"><div class="ttname"><a href="class_diwa.html#a0677924dfd094ccc8f295feb896d96a7">Diwa::inference</a></div><div class="ttdeci">double * inference(double *inputs)</div><div class="ttdoc">Perform inference on the neural network.</div><div class="ttdef"><b>Definition</b> diwa.cpp:132</div></div>
-<div class="ttc" id="aclass_diwa_html_a22d9a6ed4e81f2f9d6b6845f0d076866"><div class="ttname"><a href="class_diwa.html#a22d9a6ed4e81f2f9d6b6845f0d076866">Diwa::calculateAccuracy</a></div><div class="ttdeci">double calculateAccuracy(double *testInput, double *testExpectedOutput, int epoch)</div><div class="ttdoc">Calculates the accuracy of the neural network on test data.</div><div class="ttdef"><b>Definition</b> diwa.cpp:468</div></div>
-<div class="ttc" id="aclass_diwa_html_a513dc40d5b18567013ea84185c91089b"><div class="ttname"><a href="class_diwa.html#a513dc40d5b18567013ea84185c91089b">Diwa::train</a></div><div class="ttdeci">void train(double learningRate, double *inputNeurons, double *outputNeurons)</div><div class="ttdoc">Train the neural network using backpropagation.</div><div class="ttdef"><b>Definition</b> diwa.cpp:184</div></div>
-<div class="ttc" id="aclass_diwa_html_a9334d8e482d97c52ddfe7137257b2f7c"><div class="ttname"><a href="class_diwa.html#a9334d8e482d97c52ddfe7137257b2f7c">Diwa::calculateLoss</a></div><div class="ttdeci">double calculateLoss(double *testInput, double *testExpectedOutput, int epoch)</div><div class="ttdoc">Calculates the loss of the neural network on test data.</div><div class="ttdef"><b>Definition</b> diwa.cpp:477</div></div>
-<div class="ttc" id="aclass_diwa_html_a9647345843529f26c7ec3959697d73e0"><div class="ttname"><a href="class_diwa.html#a9647345843529f26c7ec3959697d73e0">Diwa::initialize</a></div><div class="ttdeci">DiwaError initialize(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons, bool randomizeWeights=true)</div><div class="ttdoc">Initializes the Diwa neural network with specified parameters.</div><div class="ttdef"><b>Definition</b> diwa.cpp:67</div></div>
+<div class="ttc" id="aclass_diwa_html"><div class="ttname"><a href="class_diwa.html">Diwa</a></div><div class="ttdoc">Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers.</div><div class="ttdef"><b>Definition</b> diwa.h:98</div></div>
+<div class="ttc" id="aclass_diwa_html_a0677924dfd094ccc8f295feb896d96a7"><div class="ttname"><a href="class_diwa.html#a0677924dfd094ccc8f295feb896d96a7">Diwa::inference</a></div><div class="ttdeci">double * inference(double *inputs)</div><div class="ttdoc">Perform inference on the neural network.</div><div class="ttdef"><b>Definition</b> diwa.cpp:140</div></div>
+<div class="ttc" id="aclass_diwa_html_a22d9a6ed4e81f2f9d6b6845f0d076866"><div class="ttname"><a href="class_diwa.html#a22d9a6ed4e81f2f9d6b6845f0d076866">Diwa::calculateAccuracy</a></div><div class="ttdeci">double calculateAccuracy(double *testInput, double *testExpectedOutput, int epoch)</div><div class="ttdoc">Calculates the accuracy of the neural network on test data.</div><div class="ttdef"><b>Definition</b> diwa.cpp:478</div></div>
+<div class="ttc" id="aclass_diwa_html_a513dc40d5b18567013ea84185c91089b"><div class="ttname"><a href="class_diwa.html#a513dc40d5b18567013ea84185c91089b">Diwa::train</a></div><div class="ttdeci">void train(double learningRate, double *inputNeurons, double *outputNeurons)</div><div class="ttdoc">Train the neural network using backpropagation.</div><div class="ttdef"><b>Definition</b> diwa.cpp:192</div></div>
+<div class="ttc" id="aclass_diwa_html_a9334d8e482d97c52ddfe7137257b2f7c"><div class="ttname"><a href="class_diwa.html#a9334d8e482d97c52ddfe7137257b2f7c">Diwa::calculateLoss</a></div><div class="ttdeci">double calculateLoss(double *testInput, double *testExpectedOutput, int epoch)</div><div class="ttdoc">Calculates the loss of the neural network on test data.</div><div class="ttdef"><b>Definition</b> diwa.cpp:487</div></div>
+<div class="ttc" id="aclass_diwa_html_a9647345843529f26c7ec3959697d73e0"><div class="ttname"><a href="class_diwa.html#a9647345843529f26c7ec3959697d73e0">Diwa::initialize</a></div><div class="ttdeci">DiwaError initialize(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons, bool randomizeWeights=true)</div><div class="ttdoc">Initializes the Diwa neural network with specified parameters.</div><div class="ttdef"><b>Definition</b> diwa.cpp:75</div></div>
 <div class="ttc" id="adiwa_8h_html"><div class="ttname"><a href="diwa_8h.html">diwa.h</a></div><div class="ttdoc">This file contains the declaration of the Diwa class, a lightweight Feedforward Artificial Neural Net...</div></div>
-<div class="ttc" id="adiwa_8h_html_a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94"><div class="ttname"><a href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94">NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div><div class="ttdef"><b>Definition</b> diwa.h:62</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
+<div class="ttc" id="adiwa_8h_html_a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94"><div class="ttname"><a href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94">NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div><div class="ttdef"><b>Definition</b> diwa.h:71</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 Contribution and Feedback</h2>
 <p>Contributions and feedback are all welcome to enhance this library. If you encounter any issues, have suggestions for improvements, or would like to contribute code, please do so.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 License</h2>
 <p>Copyright 2023 - Nathanne Isip</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
