@@ -26,6 +26,14 @@ void setup() {
     // Initialize serial communication with a baud rate of 115200
     Serial.begin(115200);
 
+    #if defined(ARDUINO_ARCH_ESP32)
+    // Check the ESP32 PSRAM to initialize
+    if(!psramInit()) {
+        Serial.println(F("Cannot initialize PSRAM."));
+        while(true);
+    }
+    #endif
+
     // Define training input and output data for XOR operation
     double trainingInput[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
     double trainingOutput[4][1] = {{1}, {0}, {0}, {1}};
