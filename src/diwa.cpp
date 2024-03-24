@@ -25,14 +25,22 @@
 #   include <bootloader_random.h>
 #endif
 
-#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
+#if (defined(__GNUC__) || \
+    defined(__GNUG__) || \
+    defined(__clang__) || \
+    defined(_MSC_VER)) && \
+    !defined(ARDUINO)
 #   include <cstring>
 #endif
 
 #include <diwa.h>
 #include <diwa_conv.h>
 
-#if (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
+#if (defined(__GNUC__) || \
+    defined(__GNUG__) || \
+    defined(__clang__) || \
+    defined(_MSC_VER)) && \
+    !defined(ARDUINO)
 
 static inline void writeToStream(std::ofstream& stream, const uint8_t* data, size_t size) {
     for(size_t i = 0; i < size; i++)
@@ -375,7 +383,10 @@ DiwaError Diwa::saveToFile(File annFile) {
     return NO_ERROR;
 }
 
-#elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP) && !defined(ARDUINO)
+#elif defined(__GNUC__) || \
+    defined(__GNUG__) || \
+    defined(__clang__) || \
+    defined(_MSC_VER)
 
 DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     if(!annFile.is_open())
@@ -410,12 +421,12 @@ DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
     {
         DiwaError error;
         if((error = this->initialize(
-                this->inputNeurons,
-                this->hiddenLayers,
-                this->hiddenNeurons,
-                this->outputNeurons,
-                false
-            )) != NO_ERROR)
+            this->inputNeurons,
+            this->hiddenLayers,
+            this->hiddenNeurons,
+            this->outputNeurons,
+            false
+        )) != NO_ERROR)
             return error;
 
         if((error = this->initializeWeights()) != NO_ERROR)
@@ -448,7 +459,6 @@ DiwaError Diwa::saveToFile(std::ofstream& annFile) {
 
     for(int i = 0; i < this->weightCount; i++)
         writeToStream(annFile, DiwaConv::doubleToU8a(this->weights[i]), 8);
-
     return NO_ERROR;
 }
 

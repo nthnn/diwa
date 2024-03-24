@@ -43,16 +43,19 @@
 
 #ifdef ARDUINO
 #   include <Arduino.h>
-#   if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_RP2040)
+#   if defined(ARDUINO_ARCH_ESP32) || \
+        defined(ARDUINO_ARCH_ESP8266) || \
+        defined(ARDUINO_ARCH_RP2040)
 #       include <FS.h>
 #   else
 #       include <SD.h>
 #   endif
-#elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
+#elif defined(__GNUC__) || \
+    defined(__GNUG__) || \
+    defined(__clang__) || \
+    defined(_MSC_VER)
 #   include <fstream>
 #   include <math.h>
-#elif defined(PSP)
-#   include <pspmath.h>
 #endif
 
 #include <diwa_activations.h>
@@ -245,7 +248,10 @@ public:
      */
     DiwaError saveToFile(File annFile);
 
-    #elif (defined(__GNUC__) || defined(__GNUG__) || defined(__clang__) || defined(_MSC_VER)) && !defined(PSP)
+    #elif defined(__GNUC__) || \
+        defined(__GNUG__) || \
+        defined(__clang__) || \
+        defined(_MSC_VER)
 
     /**
      * @brief Load neural network model from file in non-Arduino environment.
