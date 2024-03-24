@@ -23,6 +23,9 @@
 #include <diwa.h>
 #include <SD.h>
 
+// CS pin definition for SD card
+#define SD_CS_PIN 5
+
 // Function to train the neural network and save the trained model to a file
 void trainAndSave() {
     // Create a Diwa object
@@ -134,7 +137,7 @@ void setup() {
     Serial.begin(115200);
 
     // Initialize the SD card connected to ESP32 via SPI
-    if(!SD.begin()) {
+    if(!SD.begin(SD_CS_PIN)) {
         Serial.println(F("Something went wrong initializing SD card."));
         while(true);
     }
