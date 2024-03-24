@@ -54,7 +54,7 @@ void trainAndSave() {
         network.train(6, trainingInput[2], trainingOutput[2]);
         network.train(6, trainingInput[3], trainingOutput[3]);
     }
-    cout << "done!" << endl;
+    cout << "done!" << endl << endl;
 
     // Test inferences
     cout << "Testing inferences... " << endl;
@@ -62,22 +62,25 @@ void trainAndSave() {
         double* row = trainingInput[i];
         double* inferred = network.inference(row);
 
-        cout << "Output for [" << fixed << setprecision(1) << row[0] << ", "
+        cout << "\t[" << fixed << setprecision(1) << row[0] << ", "
               << fixed << setprecision(1) << row[1] << "]: "
-              << fixed << setprecision(1) << inferred[0] << " ("
-              << scientific << inferred[0] << ")" << endl;
+              << (inferred[0] >= 0.5) << " ("
+              << fixed << setprecision(6) << inferred[0] << ")" << endl;
     }
 
     // Save trained model to file
     cout << "Saving trained model to file... ";
-    network.saveToFile(outfile);
+    if(network.saveToFile(outfile) != NO_ERROR) {
+        cout << "Error saving model to file!" << endl;
+        exit(0);
+    }
 
     outfile.close();
-    cout << "done!" << endl;
+    cout << "done!" << endl << endl;
 }
 
 // Function to load a trained model from a file and perform inferences
-void loadAndRead() {
+void loadAndInfer() {
     // Create a Diwa object
     Diwa network;
 
@@ -103,17 +106,17 @@ void loadAndRead() {
         double* row = testInput[i];
         double* inferred = network.inference(row);
 
-        cout << "Output for [" << fixed << setprecision(1) << row[0] << ", "
+        cout << "\t[" << fixed << setprecision(1) << row[0] << ", "
               << fixed << setprecision(1) << row[1] << "]: "
-              << fixed << setprecision(1) << inferred[0] << " ("
-              << scientific << inferred[0] << ")" << endl;
+              << (inferred[0] >= 0.5) << " ("
+              << fixed << setprecision(6) << inferred[0] << ")" << endl;
     }
 }
 
 // Main function to demonstrate training, saving, loading, and inference
 int main() {
     trainAndSave(); // Train the neural network and save the trained model
-    loadAndRead();  // Load the trained model and perform inference
+    loadAndInfer();  // Load the trained model and perform inference
 
     return 0;
 }
