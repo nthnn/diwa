@@ -42,7 +42,7 @@ int main() {
 
     // Train the neural network for a certain number of epochs
     cout << "Starting neural network training... " << endl;
-    for(int epoch = 0; epoch < 3000; epoch++) {
+    for(int epoch = 0; epoch <= 1500; epoch++) {
         // Iterate through each input-output pair and train the network
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
@@ -62,12 +62,12 @@ int main() {
             // Average accuracy and loss over all samples
             accuracy /= 4, loss /= 4;
 
-            cout << "Epoch: " << epoch <<
-                ", Accuracy: " << (accuracy * 100) <<
-                "%, Loss: " << (loss * 100) << "%" << endl;
+            cout << "Epoch:\t" << epoch <<
+                "\t| Accuracy:\t" << (accuracy * 100) <<
+                "%\t| Loss:\t" << (loss * 100) << "%" << endl;
         }
     }
-    cout << "Training done!" << endl;
+    cout << "Training done!" << endl << endl;
 
     // Perform inference for each input and print the output
     cout << "Testing neural network inferences..." << endl;
@@ -76,10 +76,10 @@ int main() {
         double* inferred = network.inference(row);  // Perform inference using the neural network
 
         // Print the output for the current input
-        cout << "Output for [" << fixed << setprecision(1) << row[0] << ", "
-              << fixed << setprecision(1) << row[1] << "]: "
-              << fixed << setprecision(1) << inferred[0] << " ("
-              << scientific << inferred[0] << ")" << endl;
+        cout << "\t[" << fixed << setprecision(1) << row[0] << ", "
+              << fixed << setprecision(6) << row[1] << "]: "
+              << (inferred[0] >= 0.5) << " ("
+              << fixed << setprecision(6) << inferred[0] << ")" << endl;
     }
 
     return 0;
