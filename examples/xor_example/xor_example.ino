@@ -28,7 +28,7 @@ void setup() {
 
     #if defined(ARDUINO_ARCH_ESP32)
     // Check the ESP32 PSRAM to initialize
-    if(!psramInit()) {
+    if(psramFound() && !psramInit()) {
         Serial.println(F("Cannot initialize PSRAM."));
         while(true);
     }
