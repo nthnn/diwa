@@ -36,22 +36,43 @@ void trainAndSave() {
     double trainingOutput[4][1] = {{1}, {0}, {0}, {1}};
 
     // Initialize the neural network with specified parameters
-    if(network.initialize(2, 1, 3, 1) == NO_ERROR)
-        Serial.println(F("Done initializing neural network."));
-    else {
+    if(network.initialize(2, 1, 3, 1) != NO_ERROR) {
         Serial.println(F("Something went wrong initializing neural network."));
         while(true);
     }
 
     // Train the neural network
-    Serial.print(F("Training neural network... "));
-    for(int epoch = 0; epoch < 5000; epoch++) {
+    Serial.println(F("Training neural network... "));
+    for(int epoch = 0; epoch <= 7000; epoch++) {
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
         network.train(6, trainingInput[2], trainingOutput[2]);
         network.train(6, trainingInput[3], trainingOutput[3]);
+
+        // Show accuracy and loss on training for every 100th epoch
+        if((epoch % 1000 == 0) || epoch == 7000) {
+            double accuracy = 0.0, loss = 0.0;
+
+            // Calculate accuracy and loss for each training sample
+            for(uint8_t i = 0; i < 4; i++) {
+                accuracy += network.calculateAccuracy(trainingInput[i], trainingOutput[i], 3);
+                loss += network.calculateLoss(trainingInput[i], trainingOutput[i], 3);
+            }
+
+            // Average accuracy and loss over all samples
+            accuracy /= 4, loss /= 4;
+
+            // Print the accuracy and loss
+            Serial.print(F("Epoch: "));
+            Serial.print(epoch);
+            Serial.print(F("\t| Accuracy: "));
+            Serial.print(accuracy * 100);
+            Serial.print(F("%\t| Loss: "));
+            Serial.print(loss * 100);
+            Serial.println(F("%"));
+        }
     }
-    Serial.println(F("done!"));
+    Serial.println(F("Training done!\r\n"));
 
     // Test inferences
     Serial.println(F("Testing inferences... "));
@@ -61,7 +82,7 @@ void trainAndSave() {
 
         // Print the result for the current input
         char str[100];
-        sprintf(str, "Output for [%1.f, %1.f]: %1.f (%g)\n", row[0], row[1], inferred[0], inferred[0]);
+        sprintf(str, "\t[%g, %g]: %d (%g)\n", row[0], row[1], (inferred[0] >= 0.5), inferred[0]);
         Serial.print(str);
     }
 
@@ -70,7 +91,7 @@ void trainAndSave() {
     network.saveToFile(outfile);
 
     outfile.close();
-    Serial.println(F("done!"));
+    Serial.println(F("done!\r\n"));
 }
 
 // Function to load a trained model from a file and perform inferences
@@ -80,14 +101,14 @@ void loadAndRead() {
 
     // Open the saved model file for reading
     File infile = SD.open("/model.ann", "r");
+    Serial.println(F("Loading model file..."));
 
     // Load the trained model from the file
-    if(network.loadFromFile(infile) == NO_ERROR)
-        Serial.println(F("Model loaded successfully!"));
-    else {
+    if(network.loadFromFile(infile) != NO_ERROR) {
         Serial.println(F("Something went wrong loading model file."));
         while(true);
     }
+    else Serial.println(F("Neural network model successfully loaded!"));
 
     // Close the input trained model file
     infile.close();
@@ -102,7 +123,7 @@ void loadAndRead() {
 
         // Print the result for the current input
         char str[100];
-        sprintf(str, "Output for [%1.f, %1.f]: %1.f (%g)\n", row[0], row[1], inferred[0], inferred[0]);
+        sprintf(str, "\t[%g, %g]: %d (%g)\n", row[0], row[1], (inferred[0] >= 0.5), inferred[0]);
         Serial.print(str);
     }
 }
@@ -113,7 +134,7 @@ void setup() {
     Serial.begin(115200);
 
     // Initialize the SD card connected to ESP32 via SPI
-    if(!SD.begin(5)) {
+    if(!SD.begin()) {
         Serial.println(F("Something went wrong initializing SD card."));
         while(true);
     }
