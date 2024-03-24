@@ -28,12 +28,12 @@ See live demo on [Wokwi](https://wokwi.com/projects/387551593748039681).
 
 Diwa are tested on the following architecture/platform:
 
-| Arch/Platform     | Remarks                                              |
-|-------------------|------------------------------------------------------|
-| ✅ ESP32         | NodeMCU DevKit<br/>(Both WROOM and WROVER)            |
-| ✅ ESP8266       | Wokwi Emulation                                       |
-| ✅ RP2040        | Raspberry Pi Zero                                     |
-| 🔼 AMD64         | Works on Windows, segmentation fault on Linux systems |
+| Arch/Platform                              | Remarks                                              |
+|--------------------------------------------|------------------------------------------------------|
+| ✅ ESP32-WROOM<br/>✅ ESP32-WROVER        | NodeMCU DevKit                                        |
+| ✅ ESP8266                                | Wokwi Emulation                                       |
+| ✅ RP2040                                 | Raspberry Pi Zero                                     |
+| 🔼 AMD64                                  | Works on Windows, segmentation fault on Linux systems |
 
 ## Getting Started
 
