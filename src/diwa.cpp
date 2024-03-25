@@ -485,12 +485,7 @@ double Diwa::calculateAccuracy(double *testInput, double *testExpectedOutput, in
 }
 
 double Diwa::calculateLoss(double *testInput, double *testExpectedOutput, int epoch) {
-    int correctInference = epoch;
-    for(int i = 0; i < epoch; i++)
-        if(!this->testInference(testInput, testExpectedOutput))
-            correctInference--;
-
-    return (double) correctInference / epoch;
+    return 1.0 - this->calculateAccuracy(testInput, testExpectedOutput, epoch);
 }
 
 void Diwa::setActivationFunction(diwa_activation activation) {
