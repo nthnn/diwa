@@ -38,6 +38,9 @@ jobs:
       - name: Arduino RP2040 Platform Installation
         run: arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
+      - name: Download Arduino Dependencies
+        run: git clone https://github.com/fdivitto/fabgl.git
+
       - name: Build Arduino library on ESP8266
         run: |
           arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --library src --build-path build examples/model_on_sd/model_on_sd.ino
@@ -47,6 +50,7 @@ jobs:
         run: |
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/model_on_sd/model_on_sd.ino
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/xor_example/xor_example.ino
+          arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --library fabgl --build-path build examples/ili9341_example/ili9341_example.ino
 
       - name: Build Arduino library on RP2040
         run: |
