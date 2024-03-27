@@ -50,7 +50,7 @@ jobs:
         run: |
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/model_on_sd/model_on_sd.ino
           arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --build-path build examples/xor_example/xor_example.ino
-          arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --library fabgl --build-path build examples/ili9341_example/ili9341_example.ino
+          arduino-cli compile --fqbn esp32:esp32:esp32wrover --library src --library fabgl --build-path build examples/ili9341_xor/ili9341_xor.ino
 
       - name: Build Arduino library on RP2040
         run: |
