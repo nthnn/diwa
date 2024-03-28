@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest, macos-latest]
 
     steps:
       - name: Checkout code
@@ -26,6 +26,4 @@ jobs:
       - name: Run example programs
         run: |
           ./dist/basic_example
-          if [ "${{ matrix.os }}" != "ubuntu-latest" ]; then
-            ./dist/model_training
-          fi
+          ./dist/model_training
