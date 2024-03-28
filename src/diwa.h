@@ -248,6 +248,32 @@ public:
      */
     DiwaError saveToFile(File annFile);
 
+    #elif DOXYGEN
+
+        /**
+     * @brief Load neural network model from file in Arduino environment.
+     *
+     * This method loads a previously saved neural network model from the specified file
+     * in an Arduino environment. It reads the model data from the given file and initializes
+     * the Diwa object with the loaded model parameters and weights.
+     *
+     * @param annFile File object representing the neural network model file.
+     * @return DiwaError indicating the loading status.
+     */
+    DiwaError loadFromFile(T annFile);
+
+    /**
+     * @brief Save neural network model to file in Arduino environment.
+     *
+     * This method saves the current state of the neural network model to the specified
+     * file in an Arduino environment. It writes the model parameters and weights to the
+     * given file, allowing later retrieval and reuse of the trained model.
+     *
+     * @param annFile File object representing the destination file for the model.
+     * @return DiwaError indicating the saving status.
+     */
+    DiwaError saveToFile(T annFile);
+
     #elif defined(__GNUC__) || \
         defined(__GNUG__) || \
         defined(__clang__) || \

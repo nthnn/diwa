@@ -121,6 +121,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a513dc40d5b18567013ea84185c91089b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a513dc40d5b18567013ea84185c91089b">train</a> (double learningRate, double *inputNeurons, double *outputNeurons)</td></tr>
 <tr class="memdesc:a513dc40d5b18567013ea84185c91089b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Train the neural network using backpropagation.  <br /></td></tr>
 <tr class="separator:a513dc40d5b18567013ea84185c91089b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e620f1c3d3dd76dfe86feb9760fa465"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a2e620f1c3d3dd76dfe86feb9760fa465">loadFromFile</a> (T annFile)</td></tr>
+<tr class="memdesc:a2e620f1c3d3dd76dfe86feb9760fa465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load neural network model from file in Arduino environment.  <br /></td></tr>
+<tr class="separator:a2e620f1c3d3dd76dfe86feb9760fa465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed3c24c07e00e37339139f46772b527"><td class="memItemLeft" align="right" valign="top"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a4ed3c24c07e00e37339139f46772b527">saveToFile</a> (T annFile)</td></tr>
+<tr class="memdesc:a4ed3c24c07e00e37339139f46772b527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save neural network model to file in Arduino environment.  <br /></td></tr>
+<tr class="separator:a4ed3c24c07e00e37339139f46772b527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_diwa.html#a22d9a6ed4e81f2f9d6b6845f0d076866">calculateAccuracy</a> (double *testInput, double *testExpectedOutput, int epoch)</td></tr>
 <tr class="memdesc:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the accuracy of the neural network on test data.  <br /></td></tr>
 <tr class="separator:a22d9a6ed4e81f2f9d6b6845f0d076866"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -388,6 +394,34 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2e620f1c3d3dd76dfe86feb9760fa465" name="a2e620f1c3d3dd76dfe86feb9760fa465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e620f1c3d3dd76dfe86feb9760fa465">&#9670;&#160;</a></span>loadFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a> Diwa::loadFromFile </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>annFile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load neural network model from file in Arduino environment. </p>
+<p>This method loads a previously saved neural network model from the specified file in an Arduino environment. It reads the model data from the given file and initializes the <a class="el" href="class_diwa.html" title="Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers.">Diwa</a> object with the loaded model parameters and weights.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">annFile</td><td>File object representing the neural network model file. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>DiwaError indicating the loading status. </dd></dl>
+
+</div>
+</div>
 <a id="a8777a2d67f101047f7dfd6fb3d92bb01" name="a8777a2d67f101047f7dfd6fb3d92bb01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8777a2d67f101047f7dfd6fb3d92bb01">&#9670;&#160;</a></span>recommendedHiddenLayerCount()</h2>
 
@@ -445,6 +479,34 @@ Public Member Functions</h2></td></tr>
 <p>Calculates the recommended number of hidden neurons based on the input and output neurons. </p>
 <p>This function computes the recommended number of hidden neurons for a neural network based on the number of input and output neurons. The recommendation is calculated using a heuristic formula that aims to strike a balance between model complexity and generalization ability. The recommended number of hidden neurons is determined as the square root of the product of the input and output neurons.</p>
 <dl class="section return"><dt>Returns</dt><dd>The recommended number of hidden neurons, or -1 if the input or output neurons are non-positive. </dd></dl>
+
+</div>
+</div>
+<a id="a4ed3c24c07e00e37339139f46772b527" name="a4ed3c24c07e00e37339139f46772b527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed3c24c07e00e37339139f46772b527">&#9670;&#160;</a></span>saveToFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061a">DiwaError</a> Diwa::saveToFile </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>annFile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save neural network model to file in Arduino environment. </p>
+<p>This method saves the current state of the neural network model to the specified file in an Arduino environment. It writes the model parameters and weights to the given file, allowing later retrieval and reuse of the trained model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">annFile</td><td>File object representing the destination file for the model. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>DiwaError indicating the saving status. </dd></dl>
 
 </div>
 </div>
