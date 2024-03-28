@@ -20,8 +20,8 @@ jobs:
       - name: Building example programs
         run: |
           mkdir -p dist
-          g++ -Isrc src/*.cpp -o dist/basic_example examples/basic_example/basic_example.cpp
-          g++ -Isrc src/*.cpp -o dist/model_training examples/model_training/model_training.cpp
+          g++ -std=c++17 -Isrc src/*.cpp -o dist/basic_example examples/basic_example/basic_example.cpp
+          g++ -std=c++17 -Isrc src/*.cpp -o dist/model_training examples/model_training/model_training.cpp
 
       - name: Run example programs
         run: |
