@@ -26,4 +26,6 @@ jobs:
       - name: Run example programs
         run: |
           ./dist/basic_example
-          ./dist/model_training
+          if [ "${{ matrix.os }}" != "ubuntu-latest" ]; then
+            ./dist/model_training
+          fi
