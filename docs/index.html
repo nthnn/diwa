@@ -109,12 +109,12 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="textblock"><div align="center"> <img src="logo.png" alt="" width="200" class="inline"/> <br  />
  <h1>Diwa: Tiny AI/ML Library</h1>
 </div><div align="center"> </div><p><img src="https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg" alt="GCC Build CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg" alt="Arduino CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg" alt="Arduino Lint" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/Library%20Manager-v0.0.6-red?logo=Arduino" alt="Arduino Release" class="inline"/> <a href="https://github.com/nthnn/diwa/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" style="pointer-events: none;" class="inline"/></a></p>
-<p>Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP8266, ESP32, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (tested only on Windows OS) and even PSP gaming console. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.</p>
+<p>Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32, ESP8266, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (Windows, MacOS, and Linux-based OSes), WebAssembly, and even PSP gaming consoles. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.</p>
 <p>Diwa stands out as a straightforward and effective solution for implementing artificial neural networks on microcontrollers. Key features include:</p>
 <ul>
 <li><b>Lightweight</b>: Designed for resource-constrained microcontroller environments yet can still be used within non-Arduino environments.</li>
 <li><b>Simple Implementation</b>: Provides a basic yet effective implementation of a Feedforward ANN.</li>
-<li><b>Easy Integration</b>: Suitable for microcontrollers like ESP8266, ESP32, and RP2040. Also compatible with desktop environments and even PSP gaming console.</li>
+<li><b>Easy Integration</b>: Suitable for microcontrollers like ESP8266, ESP32, and RP2040. Also compatible with desktop environments, WebAssembly, and even PSP gaming console.</li>
 <li><b>Training Support</b>: Includes methods for training the neural network using backpropagation.</li>
 </ul>
 <blockquote class="doxtable">
@@ -129,15 +129,17 @@ Architecture/Platform Support</h2>
 <th class="markdownTableHeadNone">Arch/Platform   </th><th class="markdownTableHeadNone">Remarks    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">✅ ESP32-WROOM<br  />
-✅ ESP32-WROVER   </td><td class="markdownTableBodyNone">NodeMCU DevKit    </td></tr>
+✅ ESP32-WROVER   </td><td class="markdownTableBodyNone">NodeMCU DevKit (Automatically using PSRAM available on WROVER)    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">✅ ESP8266   </td><td class="markdownTableBodyNone">Wokwi Emulation    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">✅ RP2040   </td><td class="markdownTableBodyNone">Raspberry Pi Zero    </td></tr>
+<td class="markdownTableBodyNone">✅ RP2040   </td><td class="markdownTableBodyNone">Raspberry Pi Pico (Zero)    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">✅ PSP   </td><td class="markdownTableBodyNone">PPSSPP Emulator    </td></tr>
+<td class="markdownTableBodyNone">🔼 PSP   </td><td class="markdownTableBodyNone">PPSSPP Emulator (<a class="el" href="class_diwa.html#a2e620f1c3d3dd76dfe86feb9760fa465" title="Load neural network model from file in Arduino environment.">Diwa::loadFromFile</a> and <a class="el" href="class_diwa.html#a4ed3c24c07e00e37339139f46772b527" title="Save neural network model to file in Arduino environment.">Diwa::saveToFile</a> not yet supported)    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🔼 AMD64   </td><td class="markdownTableBodyNone">Works on Windows, segmentation fault on Linux systems   </td></tr>
+<td class="markdownTableBodyNone">✅ Desktop Environments   </td><td class="markdownTableBodyNone">Works perfectly on Windows, MacOS, and Linux. Segmentation fault on CI/CD.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">✅ WebAssembly (WASM)   </td><td class="markdownTableBodyNone">Tested via Emscripten   </td></tr>
 </table>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Getting Started</h2>
