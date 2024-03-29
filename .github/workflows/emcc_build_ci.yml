@@ -1,0 +1,25 @@
+name: Emscripten Build CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Emscripten v1.38.47
+        uses: lovasoa/setup-emscripten@master
+        with:
+          emscripten-version: '1.38.47'
+
+      - name: Building examples via emcc
+        run: |
+          mkdir -p dist
+          emcc -std=c++17 -Isrc src/*.cpp -o dist/basic_example.html examples/basic_example/basic_example.cpp
+          emcc -std=c++17 -Isrc src/*.cpp -o dist/model_training.html examples/model_training/model_training.cpp
