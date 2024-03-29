@@ -97,12 +97,14 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><ul><li class="level2"><a href="#autotoc_md0">Architecture/Platform Support</a></li>
-<li class="level2"><a href="#autotoc_md1">Getting Started</a><ul><li class="level3"><a href="#autotoc_md2">On Arduino</a></li>
+<li class="level2"><a href="#autotoc_md1">Getting Started</a><ul><li class="level3"><a href="#autotoc_md2">On Arduino Platform</a></li>
+<li class="level3"><a href="#autotoc_md3">On C++ Projects (Including Emscripten)</a></li>
+<li class="level3"><a href="#autotoc_md4">PlayStation Portable SDK</a></li>
 </ul>
 </li>
-<li class="level2"><a href="#autotoc_md3">Examples</a></li>
-<li class="level2"><a href="#autotoc_md4">Contribution and Feedback</a></li>
-<li class="level2"><a href="#autotoc_md5">License</a></li>
+<li class="level2"><a href="#autotoc_md5">Examples</a></li>
+<li class="level2"><a href="#autotoc_md6">Contribution and Feedback</a></li>
+<li class="level2"><a href="#autotoc_md7">License</a></li>
 </ul>
 </ul>
 </div>
@@ -144,10 +146,15 @@ Architecture/Platform Support</h2>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Getting Started</h2>
 <h3><a class="anchor" id="autotoc_md2"></a>
-On Arduino</h3>
+On Arduino Platform</h3>
 <p>To start using Diwa library in your Arduino projects, follow these simple steps:</p>
 <ol type="1">
-<li>Download the Diwa library from the GitHub repository.</li>
+<li>Open your Library Manager on Arduino IDE.</li>
+<li>Type <code>diwa</code> and click "Install."</li>
+</ol>
+<p>Alternatively, you can follow the steps below:</p>
+<ol type="1">
+<li>Download the <a class="el" href="class_diwa.html" title="Lightweight Feedforward Artificial Neural Network (ANN) library tailored for microcontrollers.">Diwa</a> library from the GitHub repository.</li>
 <li>Extract the downloaded archive and rename the folder to "diwa".</li>
 <li>Move the "diwa" folder to the Arduino libraries directory on your computer.<ul>
 <li>Windows: <code>Documents\Arduino\libraries\</code></li>
@@ -157,7 +164,28 @@ On Arduino</h3>
 </li>
 <li>Launch the Arduino IDE.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h3><a class="anchor" id="autotoc_md3"></a>
+On C++ Projects (Including Emscripten)</h3>
+<p>Using Diwa on C++ projects might be quite different depending on what build tools you are using.</p>
+<ol type="1">
+<li>Include the Diwa git repository as submodule on your project's <code>lib</code> folder.</li>
+</ol>
+<div class="fragment"><div class="line">git submodule add https://github.com/nthnn/diwa.git</div>
+</div><!-- fragment --><p>To do this, your project must be a git repository.</p>
+<ol type="1">
+<li>Add the <code>lib/diwa/src</code> folder on your project's <code>Makefile</code>.</li>
+<li>Add the <code>*.cpp</code> files on the build source files.</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md4"></a>
+PlayStation Portable SDK</h3>
+<p>Same on every C++ projects, depending on your build process, this might be quite different on some instances.</p>
+<ol type="1">
+<li>Add <code>--std=c++17</code> on the compiler arguments.</li>
+<li>Include the <code>src</code> folder on the include arguments.</li>
+<li>Finally, include the <code>*.cpp</code> files from the <code>src</code> folder on compilation.</li>
+</ol>
+<p>Or you can check the <a href="examples/psp_xor/build.bat">examples/psp_xor/build.bat</a> for reference.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Examples</h2>
 <p>To access the examples:</p>
 <ol type="1">
@@ -246,10 +274,10 @@ Examples</h2>
 <div class="ttc" id="aclass_diwa_html_a9647345843529f26c7ec3959697d73e0"><div class="ttname"><a href="class_diwa.html#a9647345843529f26c7ec3959697d73e0">Diwa::initialize</a></div><div class="ttdeci">DiwaError initialize(int inputNeurons, int hiddenLayers, int hiddenNeurons, int outputNeurons, bool randomizeWeights=true)</div><div class="ttdoc">Initializes the Diwa neural network with specified parameters.</div><div class="ttdef"><b>Definition</b> diwa.cpp:75</div></div>
 <div class="ttc" id="adiwa_8h_html"><div class="ttname"><a href="diwa_8h.html">diwa.h</a></div><div class="ttdoc">This file contains the declaration of the Diwa class, a lightweight Feedforward Artificial Neural Net...</div></div>
 <div class="ttc" id="adiwa_8h_html_a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94"><div class="ttname"><a href="diwa_8h.html#a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94">NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div><div class="ttdef"><b>Definition</b> diwa.h:71</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
 Contribution and Feedback</h2>
 <p>Contributions and feedback are all welcome to enhance this library. If you encounter any issues, have suggestions for improvements, or would like to contribute code, please do so.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 License</h2>
 <p>Copyright 2023 - Nathanne Isip</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>

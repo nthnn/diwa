@@ -41,17 +41,47 @@ Diwa are tested on the following architecture/platform:
 
 ## Getting Started
 
-### On Arduino
+### On Arduino Platform
 
 To start using %Diwa library in your Arduino projects, follow these simple steps:
 
-1. Download the %Diwa library from the GitHub repository.
+1. Open your Library Manager on Arduino IDE.
+2. Type `diwa` and click "Install."
+
+Alternatively, you can follow the steps below:
+
+1. Download the Diwa library from the GitHub repository.
 2. Extract the downloaded archive and rename the folder to "diwa".
 3. Move the "diwa" folder to the Arduino libraries directory on your computer.
     - Windows: `Documents\Arduino\libraries\`
     - MacOS: `~/Documents/Arduino/libraries/`
     - Linux: `~/Arduino/libraries/`
 4. Launch the Arduino IDE.
+
+### On C++ Projects (Including Emscripten)
+
+Using %Diwa on C++ projects might be quite different depending on what build tools you are using.
+
+1. Include the %Diwa git repository as submodule on your project's `lib` folder.
+
+```bash
+git submodule add https://github.com/nthnn/diwa.git
+```
+
+To do this, your project must be a git repository.
+
+2. Add the `lib/diwa/src` folder on your project's `Makefile`.
+3. Add the `*.cpp` files on the build source files.
+
+### PlayStation Portable SDK
+
+Same on every C++ projects, depending on your build process, this might be quite different on some instances.
+
+1. Add `--std=c++17` on the compiler arguments.
+2. Include the `src` folder on the include arguments.
+3. Finally, include the `*.cpp` files from the `src` folder on compilation.
+
+Or you can check the [examples/psp_xor/build.bat](examples/psp_xor/build.bat) for reference.
 
 ## Examples
 
