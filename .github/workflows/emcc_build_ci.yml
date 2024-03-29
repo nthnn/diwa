@@ -13,10 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Emscripten v1.38.47
-        uses: lovasoa/setup-emscripten@master
+      - name: Setup emsdk
+        uses: mymindstorm/setup-emsdk@v14
         with:
-          emscripten-version: '1.38.47'
+          version: 1.38.40
+          actions-cache-folder: 'emsdk-cache'
+      
+      - name: Verify Emscripten installation
+        run: emcc -v
 
       - name: Building examples via emcc
         run: |
