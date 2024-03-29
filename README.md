@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://github.com/nthnn/diwa/blob/main/logo.png" width="200" />
     <br/><br/>
-    <h1>Diwa: Arduino Tiny AI/ML Library</h1>
+    <h1>Diwa: Tiny AI/ML Library</h1>
 </p>
 
 ![GCC Build CI](https://github.com/nthnn/diwa/actions/workflows/gcc_build_ci.yml/badge.svg)
@@ -32,7 +32,7 @@ Diwa are tested on the following architecture/platform:
 | Arch/Platform                              | Remarks                                                                     |
 |--------------------------------------------|-----------------------------------------------------------------------------|
 | ✅ ESP32-WROOM<br/>✅ ESP32-WROVER        | NodeMCU DevKit (Automatically using PSRAM available on WROVER)              |
-| ✅ ESP8266                                | Wokwi Emulation                                                              |
+| ✅ ESP8266                                | [Wokwi](https://wokwi.com/) Emulation                                        |
 | ✅ RP2040                                 | Raspberry Pi Pico (Zero)                                                     |
 | 🔼 PSP                                    | PPSSPP Emulator (Diwa::loadFromFile and Diwa::saveToFile not yet supported)  |
 | ✅ Desktop Environments                   | Works perfectly on Windows, MacOS, and Linux. Segmentation fault on CI/CD.   |

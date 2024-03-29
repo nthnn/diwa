@@ -34,7 +34,7 @@ Diwa are tested on the following architecture/platform:
 | Arch/Platform                              | Remarks                                                                     |
 |--------------------------------------------|-----------------------------------------------------------------------------|
 | ✅ ESP32-WROOM<br/>✅ ESP32-WROVER        | NodeMCU DevKit (Automatically using PSRAM available on WROVER)              |
-| ✅ ESP8266                                | Wokwi Emulation                                                              |
+| ✅ ESP8266                                | [Wokwi](https://wokwi.com/) Emulation                                        |
 | ✅ RP2040                                 | Raspberry Pi Pico (Zero)                                                     |
 | 🔼 PSP                                    | PPSSPP Emulator (Diwa::loadFromFile and Diwa::saveToFile not yet supported)  |
 | ✅ Desktop Environments                   | Works perfectly on Windows, MacOS, and Linux. Segmentation fault on CI/CD.   |
