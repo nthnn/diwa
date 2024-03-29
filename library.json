@@ -1,6 +1,6 @@
 {
     "name": "diwa",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Lightweight simple implementation of Artificial Neural Network for Arduino ESP32, ESP8266, RP2040, PlayStation Portable SDK, and even Windows AMD64 environment.",
     "keywords": ["ANN", "Artificial Neural Network", "microcontrollers", "ESP8266", "ESP32", "RP2040"],
     "repository": {
