@@ -11,6 +11,7 @@
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg)
 ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
 ![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.6-red?logo=Arduino)
+![Emscripten Build CI](https://github.com/nthnn/diwa/actions/workflows/emcc_build_ci.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
 %Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32, ESP8266, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (Windows, MacOS, and Linux-based OSes), WebAssembly, and even PSP gaming consoles. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
