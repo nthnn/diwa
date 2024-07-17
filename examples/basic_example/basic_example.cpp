@@ -42,7 +42,7 @@ int main() {
 
     // Train the neural network for a certain number of epochs
     cout << "Starting neural network training... " << endl;
-    for(int epoch = 0; epoch <= 1500; epoch++) {
+    for(int epoch = 0; epoch <= 3000; epoch++) {
         // Iterate through each input-output pair and train the network
         network.train(6, trainingInput[0], trainingOutput[0]);
         network.train(6, trainingInput[1], trainingOutput[1]);
