@@ -40,6 +40,14 @@ Diwa are tested on the following architecture/platform:
 
 ## Getting Started
 
+## Docker
+
+You can have a quickstart by running the Docker image.
+
+```shell
+docker run nthnn/diwa:0.0.7
+```
+
 ### On Arduino Platform
 
 To start using Diwa library in your Arduino projects, follow these simple steps:
