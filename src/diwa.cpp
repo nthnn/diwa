@@ -515,3 +515,35 @@ int Diwa::recommendedHiddenLayerCount(int numSamples, int alpha) {
 
     return count;
 }
+
+int Diwa::getInputNeurons() const {
+    return this->inputNeurons;
+}
+
+int Diwa::getHiddenNeurons() const {
+    return this->hiddenNeurons;
+}
+
+int Diwa::getHiddenLayers() const {
+    return this->hiddenLayers;
+}
+
+int Diwa::getOutputNeurons() const {
+    return this->outputNeurons;
+}
+
+int Diwa::getWeightCount() const {
+    return this->weightCount;
+}
+
+int Diwa::getNeuronCount() const {
+    return this->neuronCount;
+}
+
+void Diwa::getWeights(double* weights) {
+    weights = this->weights;
+}
+
+void Diwa::getOutputs(double* outputs) {
+    outputs = this->outputs;
+}

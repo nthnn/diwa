@@ -391,6 +391,94 @@ public:
      * @return The recommended number of hidden layers, or -1 if any of the input parameters are non-positive.
      */
     int recommendedHiddenLayerCount(int numSamples, int alpha);
+
+    /**
+     * @brief Get the number of input neurons in the neural network.
+     *
+     * This function returns the number of input neurons in the neural network.
+     * It is useful for understanding the network's input size.
+     *
+     * @return The number of input neurons.
+     */
+    int getInputNeurons() const;
+
+    /**
+     * @brief Get the number of neurons in the hidden layer.
+     *
+     * This function returns the number of neurons in a single hidden layer
+     * of the neural network. If there are multiple hidden layers, this value
+     * represents the number of neurons per hidden layer.
+     *
+     * @return The number of neurons in each hidden layer.
+     */
+    int getHiddenNeurons() const;
+
+    /**
+     * @brief Get the number of hidden layers in the neural network.
+     *
+     * This function returns the total number of hidden layers in the neural network.
+     * It helps to understand the depth of the network architecture.
+     *
+     * @return The number of hidden layers.
+     */
+    int getHiddenLayers() const;
+
+    /**
+     * @brief Get the number of output neurons in the neural network.
+     *
+     * This function returns the number of output neurons in the neural network.
+     * This is useful for understanding the size of the output layer and the
+     * expected output format.
+     *
+     * @return The number of output neurons.
+     */
+    int getOutputNeurons() const;
+
+    /**
+     * @brief Get the total number of weights in the neural network.
+     *
+     * This function calculates and returns the total number of weights present
+     * in the neural network. This includes weights for connections between 
+     * input neurons, hidden layers, and output neurons.
+     *
+     * @return The total number of weights.
+     */
+    int getWeightCount() const;
+
+    /**
+     * @brief Get the total number of neurons in the neural network.
+     *
+     * This function calculates and returns the total number of neurons in the
+     * neural network, including input neurons, hidden neurons (across all layers),
+     * and output neurons.
+     *
+     * @return The total number of neurons.
+     */
+    int getNeuronCount() const;
+
+    /**
+     * @brief Retrieve the weights of the neural network.
+     *
+     * This function copies the current weights of the neural network into
+     * the provided array. The array must be pre-allocated with sufficient
+     * space to hold all the weights.
+     *
+     * @param weights Pointer to an array where the weights will be copied.
+     *        The size of the array should be at least `getWeightCount()` elements.
+     */
+    void getWeights(double* weights);
+
+    /**
+     * @brief Retrieve the outputs of the neural network.
+     *
+     * This function copies the current outputs of the neural network into
+     * the provided array. The array must be pre-allocated with sufficient
+     * space to hold all the outputs.
+     *
+     * @param outputs Pointer to an array where the outputs will be copied.
+     *        The size of the array should be at least `getOutputNeurons()` elements.
+     */
+    void getOutputs(double* outputs);
 };
 
 #endif  // DIWA_H
