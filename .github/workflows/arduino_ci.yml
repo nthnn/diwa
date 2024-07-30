@@ -33,7 +33,7 @@ jobs:
         run: arduino-cli core install esp8266:esp8266 --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
 
       - name: Arduino ESP32 Platform Installation
-        run: arduino-cli core install esp32:esp32
+        run: arduino-cli core install esp32:esp32@2.0.15
 
       - name: Arduino RP2040 Platform Installation
         run: arduino-cli core install rp2040:rp2040 --additional-urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
