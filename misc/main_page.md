@@ -11,7 +11,7 @@
 ![Emscripten Build CI](https://github.com/nthnn/diwa/actions/workflows/emcc_build_ci.yml/badge.svg)
 ![Arduino CI](https://github.com/nthnn/diwa/actions/workflows/arduino_ci.yml/badge.svg)
 ![Arduino Lint](https://github.com/nthnn/diwa/actions/workflows/arduino_lint.yml/badge.svg)
-![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.7-red?logo=Arduino)
+![Arduino Release](https://img.shields.io/badge/Library%20Manager-v0.0.8-red?logo=Arduino)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nthnn/diwa/blob/main/LICENSE)
 
 %Diwa is a lightweight library providing a simple implementation of Feedforward Artificial Neural Networks (ANNs) for microcontrollers such as ESP32, ESP8266, RP2040, and similar development boards (specially boards with PSRAM); it is also compatible for desktop environments (Windows, MacOS, and Linux-based OSes), WebAssembly, and even PSP gaming consoles. It is designed for resource-constrained environments but can be used with non-Arduino platform projects, offering a streamlined solution for tasks that require neural network capabilities.
@@ -31,14 +31,14 @@ See live demo on [Wokwi](https://wokwi.com/projects/387551593748039681).
 
 Diwa are tested on the following architecture/platform:
 
-| Arch/Platform                              | Remarks                                                                     |
-|--------------------------------------------|-----------------------------------------------------------------------------|
-| ✅ ESP32-WROOM<br/>✅ ESP32-WROVER        | NodeMCU DevKit (Automatically using PSRAM available on WROVER)              |
-| ✅ ESP8266                                | [Wokwi](https://wokwi.com/) Emulation                                        |
-| ✅ RP2040                                 | Raspberry Pi Pico (Zero)                                                     |
-| 🔼 PSP                                    | PPSSPP Emulator (Diwa::loadFromFile and Diwa::saveToFile not yet supported)  |
-| ✅ Desktop Environments                   | Works perfectly on Windows, MacOS, and Linux. Segmentation fault on CI/CD.   |
-| ✅ WebAssembly (WASM)                     | Tested via Emscripten                                                        |
+| Arch/Platform                              | Remarks                                              |
+|--------------------------------------------|------------------------------------------------------|
+| ✅ ESP32-WROOM<br/>✅ ESP32-WROVER         | NodeMCU DevKit (Automatically using PSRAM available) |
+| ✅ ESP8266                                 | [Wokwi](https://wokwi.com/) Emulation                |
+| ✅ RP2040                                  | Raspberry Pi Pico (RP2040)                           |
+| 🔼 PSP                                     | PPSSPP Emulator (Diwa::loadFromFile and Diwa::saveToFile not yet supported)  |
+| ✅ Desktop Environments                    | Works perfectly on Windows, MacOS, and Linux.        |
+| ✅ WebAssembly (WASM)                      | Tested via Emscripten                                |
 
 ## Getting Started
 
