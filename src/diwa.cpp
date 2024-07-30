@@ -425,7 +425,7 @@ DiwaError Diwa::loadFromFile(std::ifstream& annFile) {
             this->hiddenLayers,
             this->hiddenNeurons,
             this->outputNeurons,
-            false
+            true
         )) != NO_ERROR)
             return error;
 
