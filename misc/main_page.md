@@ -74,6 +74,9 @@ To do this, your project must be a git repository.
 2. Add the `lib/diwa/src` folder on your project's `Makefile`.
 3. Add the `*.cpp` files on the build source files.
 
+> [!NOTE]
+> Alternatively, you can download the `*.deb` file from the [release](https://github.com/nthnn/diwa/releases) page to install Diwa as a shared library on Debian-based operating systems.
+
 ### PlayStation Portable SDK
 
 Same on every C++ projects, depending on your build process, this might be quite different on some instances.
