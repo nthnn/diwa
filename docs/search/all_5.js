@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['loadfromfile_0',['loadFromFile',['../class_diwa.html#a2e620f1c3d3dd76dfe86feb9760fa465',1,'Diwa']]]
+  ['gaussian_0',['gaussian',['../classDiwaActivationFunc.html#a3f6893bca239e761c9429090503c1b0d',1,'DiwaActivationFunc']]],
+  ['getactivationfunction_1',['getActivationFunction',['../classDiwa.html#a410c77ad562f6e49f9d79c4fde37ac3d',1,'Diwa']]],
+  ['getting_20started_2',['Getting Started',['../index.html#autotoc_md1',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var diwa_8h =
 [
-    [ "Diwa", "class_diwa.html", "class_diwa" ],
+    [ "Diwa", "classDiwa.html", "classDiwa" ],
     [ "DiwaError", "diwa_8h.html#a669df21efbcbba971edbc5d4e091061a", [
       [ "NO_ERROR", "diwa_8h.html#a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94", null ],
       [ "INVALID_PARAM_VALUES", "diwa_8h.html#a669df21efbcbba971edbc5d4e091061aaf4dff1de0bec3fea6316980fe9327111", null ],

@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['malloc_5ffailed_0',['MALLOC_FAILED',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aa3667c6811bc5a1cc040c7929768787f7',1,'diwa.h']]],
-  ['model_5fread_5ferror_1',['MODEL_READ_ERROR',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aa75f40fca21d79ec74d70aea05b9acc8f',1,'diwa.h']]],
-  ['model_5fsave_5ferror_2',['MODEL_SAVE_ERROR',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aa5f2e5fe3ff93c34cbf23653d7a7f2614',1,'diwa.h']]]
+  ['including_20emscripten_0',['On C++ Projects (Including Emscripten)',['../index.html#autotoc_md3',1,'']]],
+  ['inference_1',['inference',['../classDiwa.html#a0677924dfd094ccc8f295feb896d96a7',1,'Diwa']]],
+  ['initialize_2',['initialize',['../classDiwa.html#a9647345843529f26c7ec3959697d73e0',1,'Diwa']]],
+  ['initializeradialbasis_3',['initializeRadialBasis',['../classDiwaActivationFunc.html#a2e472988fd78fb8511aa5d2181dc98a6',1,'DiwaActivationFunc']]],
+  ['invalid_5fmagic_5fnumber_4',['INVALID_MAGIC_NUMBER',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aaf717a09014c36465bee5f2bffb9d0dfe',1,'diwa.h']]],
+  ['invalid_5fparam_5fvalues_5',['INVALID_PARAM_VALUES',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aaf4dff1de0bec3fea6316980fe9327111',1,'diwa.h']]]
 ];

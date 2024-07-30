@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['no_5ferror_0',['NO_ERROR',['../diwa_8h.html#a669df21efbcbba971edbc5d4e091061aabf350750d0d4fabd8954c0f1e9bbae94',1,'diwa.h']]]
+  ['library_0',['Diwa AI/ML Library',['../index.html',1,'']]],
+  ['license_1',['License',['../index.html#autotoc_md7',1,'']]],
+  ['loadfromfile_2',['loadFromFile',['../classDiwa.html#a2e620f1c3d3dd76dfe86feb9760fa465',1,'Diwa']]]
 ];

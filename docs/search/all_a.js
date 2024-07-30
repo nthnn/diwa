@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['train_0',['train',['../class_diwa.html#a513dc40d5b18567013ea84185c91089b',1,'Diwa']]]
+  ['on_20arduino_20platform_0',['On Arduino Platform',['../index.html#autotoc_md2',1,'']]],
+  ['on_20c_20projects_20including_20emscripten_1',['On C++ Projects (Including Emscripten)',['../index.html#autotoc_md3',1,'']]]
 ];
