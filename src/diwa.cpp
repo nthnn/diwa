@@ -31,6 +31,9 @@
     defined(_MSC_VER)) && \
     !defined(ARDUINO)
 #   include <cstring>
+#   ifdef _OPENMP
+#       include <omp.h>
+#   endif
 #endif
 
 #include <diwa.h>
