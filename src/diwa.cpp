@@ -145,6 +145,8 @@ double* Diwa::inference(double *inputNeurons) {
     memcpy(this->outputs, inputNeurons, sizeof(double) * this->inputNeurons);
     if(!this->hiddenLayers) {
         double *returnValues = outputs;
+
+        #pragma omp parallel for
         for(int j = 0; j < this->outputNeurons; ++j) {
             double sum = *weights++ * -1.0;
 
@@ -166,6 +168,7 @@ double* Diwa::inference(double *inputNeurons) {
 
     inputs += this->inputNeurons;
     for(int h = 1; h < this->hiddenLayers; ++h) {
+        #pragma omp parallel for
         for(int j = 0; j < this->hiddenNeurons; ++j) {
             double sum = *weights++ * -1.0;
             
@@ -178,6 +181,8 @@ double* Diwa::inference(double *inputNeurons) {
     }
 
     double* returnValue = outputs;
+
+    #pragma omp parallel for
     for(int j = 0; j < this->outputNeurons; ++j) {
         double sum = *weights++ * -1.0;
 
@@ -270,6 +275,7 @@ void Diwa::train(double learningRate, double *inputNeurons, double *outputNeuron
                 (this->inputNeurons + this->hiddenNeurons *
                     (this->hiddenLayers - 1)) : 0);
 
+        #pragma omp parallel for
         for(int j = 0; j < this->outputNeurons; ++j) {
             *weights++ += *deltas * learningRate * -1.0;
 
@@ -297,6 +303,7 @@ void Diwa::train(double learningRate, double *inputNeurons, double *outputNeuron
                 (this->hiddenNeurons + 1) * this->hiddenNeurons *
                 (h - 1) : 0);
 
+        #pragma omp parallel for
         for(int j = 0; j < this->hiddenNeurons; ++j) {
             *weights += *deltas * learningRate * -1.0;
 
